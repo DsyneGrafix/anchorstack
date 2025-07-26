@@ -1,21 +1,7 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-// src/pages/Dashboard.tsx
-import { useState, useEffect } from 'react';
-import FocusTimer from '../components/FocusTimer';
-import QuickNotes from '../components/QuickNotes';
-const Dashboard = () => {
-    const quotes = [
-        "“Commit to the Lord whatever you do, and He will establish your plans.” – Proverbs 16:3",
-        "“In all your ways acknowledge Him, and He will make your paths straight.” – Proverbs 3:6",
-        "“Be still, and know that I am God.” – Psalm 46:10",
-    ];
-    const [quoteIndex, setQuoteIndex] = useState(0);
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setQuoteIndex((prev) => (prev + 1) % quotes.length);
-        }, 8000);
-        return () => clearInterval(interval);
-    }, []);
-    return (_jsxs("div", { className: "p-6 space-y-8", children: [_jsx("h1", { className: "text-2xl font-bold", children: "\uD83C\uDFAF AnchorStack Dashboard" }), _jsx(FocusTimer, {}), _jsx(QuickNotes, {}), _jsx("p", { className: "italic text-gray-600 dark:text-gray-300", children: quotes[quoteIndex] })] }));
-};
-export default Dashboard;
+import Layout from '../layouts/Layout';
+import FocusTimer from "@/components/FocusTimer";
+import QuickNotes from "@/components/QuickNotes";
+export default function DashboardPage() {
+    return (_jsx(Layout, { children: _jsxs("div", { className: "max-w-5xl mx-auto py-12 px-6", children: [_jsx("h1", { className: "text-4xl font-bold mb-10 text-anchor-800 text-center", children: "\uD83C\uDFAF AnchorStack Dashboard" }), _jsxs("div", { className: "grid grid-cols-1 md:grid-cols-2 gap-12", children: [_jsxs("div", { className: "bg-white rounded-xl shadow p-6", children: [_jsx("h2", { className: "text-2xl font-semibold text-anchor-700 mb-4", children: "\u23F1\uFE0F Focus Timer" }), _jsx(FocusTimer, {})] }), _jsxs("div", { className: "bg-white rounded-xl shadow p-6", children: [_jsx("h2", { className: "text-2xl font-semibold text-anchor-700 mb-4", children: "\uD83D\uDCDD Quick Notes" }), _jsx(QuickNotes, {})] })] })] }) }));
+}

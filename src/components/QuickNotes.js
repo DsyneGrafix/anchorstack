@@ -1,16 +1,21 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { useState } from 'react';
-import { useNotesStore } from '../store/useNotesStore';
-import { nanoid } from 'nanoid';
+import { useState } from "react";
+import { nanoid } from "nanoid";
+import { useNotesStore } from "@/store/useNotesStore";
 const QuickNotes = () => {
     const { notes, addNote, deleteNote } = useNotesStore();
-    const [noteText, setNoteText] = useState('');
+    const [noteText, setNoteText] = useState("");
     const handleAdd = () => {
-        if (noteText.trim()) {
-            addNote({ id: nanoid(), content: noteText.trim() });
-            setNoteText('');
-        }
-    };
-    return (_jsxs("div", { className: "bg-white dark:bg-gray-800 p-4 rounded-xl shadow mt-6", children: [_jsx("h3", { className: "text-lg font-bold mb-2", children: "\uD83D\uDCDD Quick Notes" }), _jsx("textarea", { className: "w-full p-2 rounded border dark:border-gray-700 mb-2", rows: 3, value: noteText, onChange: (e) => setNoteText(e.target.value), placeholder: "Write a quick note..." }), _jsx("button", { onClick: handleAdd, className: "bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700", children: "Add Note" }), _jsx("ul", { className: "mt-4 space-y-2", children: notes.map((note) => (_jsxs("li", { className: "flex justify-between items-center bg-gray-100 dark:bg-gray-700 p-2 rounded", children: [_jsx("span", { children: note.content }), _jsx("button", { onClick: () => deleteNote(note.id), className: "text-red-500 hover:text-red-700", children: "\u2715" })] }, note.id))) })] }));
+        if (noteText.trim() === "")
+            return;
+        addNote({
+            id: nanoid(),
+            content: noteText.trim(),
+            createdAt: new Date().toISOString(),
+            timestamp: Date.now(),
+        });
+    }, setNoteText;
+    ("");
 };
+return (_jsxs("div", { className: "bg-white rounded-xl p-4 shadow-md w-full max-w-md mx-auto", children: [_jsx("h2", { className: "text-xl font-bold mb-4 text-anchor-800", children: "\uD83D\uDCDD Quick Notes" }), _jsx("textarea", { value: noteText, onChange: (e) => setNoteText(e.target.value), placeholder: "Type your note here...", className: "w-full border rounded-md p-2 mb-2", rows: 3 }), _jsx("button", { onClick: handleAdd, className: "bg-anchor-600 hover:bg-anchor-700 text-white px-4 py-2 rounded-md", children: "Add Note" }), _jsx("ul", { className: "mt-4 space-y-2", children: notes.map((note) => (_jsxs("li", { className: "bg-neutral-100 rounded-md p-3 relative", children: [_jsx("button", { onClick: () => deleteNote(note.id), className: "absolute top-2 right-2 text-red-500 text-sm", children: "\u2715" }), _jsx("p", { className: "text-sm", children: note.content }), _jsx("p", { className: "text-xs text-gray-400 mt-1", children: note.timestamp ? new Date(note.timestamp).toLocaleString() : "No timestamp" })] }, note.id))) })] }));
 export default QuickNotes;

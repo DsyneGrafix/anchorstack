@@ -1,0 +1,5 @@
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import Layout from '../layouts/Layout';
+export default function AboutPage() {
+    return (_jsx(Layout, { children: _jsxs("div", { className: "max-w-4xl mx-auto py-16 px-6 text-center", children: [_jsx("h1", { className: "text-4xl font-bold text-anchor-800 mb-6", children: "\uD83D\uDE4F About AnchorStack" }), _jsx("p", { className: "text-lg text-anchor-600 mb-8", children: "AnchorStack is more than a platform \u2014 it's a movement for Kingdom-minded creators, dreamers, and doers who want to reclaim their time, attention, and purpose." }), _jsx("p", { className: "text-base text-anchor-500 mb-6", children: "Everything here was built to help you show up with clarity. Whether you\u2019re launching your first digital product, resetting your habits, or just trying to hear from God again in the noise \u2014 you\u2019ll find your tools here." }), _jsx("p", { className: "text-base text-anchor-500", children: "We\u2019re just getting started. New kits, challenges, and tools drop monthly. Join the movement \u2014 and build something that actually matters." })] }) }));
+}

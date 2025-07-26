@@ -1,7 +1,7 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useEffect, useState } from 'react';
-import FocusTimer from '@/components/FocusTimer';
-import QuickNotes from '@/components/QuickNotes';
+import FocusTimer from "@/components/FocusTimer";
+import QuickNotes from "@/components/QuickNotes";
 const quotes = [
     "Clarity comes when you stop forcing the answer.",
     "Stillness is not weakness. It’s wisdom.",
