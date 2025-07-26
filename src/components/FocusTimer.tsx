@@ -1,21 +1,19 @@
 import React, { useState, useEffect } from 'react';
 
 const FocusTimer: React.FC = () => {
-  const [secondsLeft, setSecondsLeft] = useState(1500); // 25 min
+  const [secondsLeft, setSecondsLeft] = useState(1500);
   const [isRunning, setIsRunning] = useState(false);
 
   useEffect(() => {
-    let interval: NodeJS.Timeout | null = null;
+    let interval: NodeJS.Timeout;
     if (isRunning && secondsLeft > 0) {
       interval = setInterval(() => {
         setSecondsLeft((prev) => prev - 1);
       }, 1000);
-    } else if (interval) {
+    } else {
       clearInterval(interval);
     }
-    return () => {
-      if (interval) clearInterval(interval);
-    };
+    return () => clearInterval(interval);
   }, [isRunning, secondsLeft]);
 
   const toggleTimer = () => setIsRunning(!isRunning);
@@ -25,9 +23,9 @@ const FocusTimer: React.FC = () => {
   };
 
   const formatTime = (sec: number): string =>
-    `${Math.floor(sec / 60)
+    \`\${Math.floor(sec / 60).toString().padStart(2, '0')}:\${(sec % 60)
       .toString()
-      .padStart(2, '0')}:${(sec % 60).toString().padStart(2, '0')}`;
+      .padStart(2, '0')}\`;
 
   return (
     <div className="bg-white dark:bg-gray-900 rounded-xl p-4 shadow w-full max-w-md mx-auto mt-4">
@@ -46,4 +44,3 @@ const FocusTimer: React.FC = () => {
 };
 
 export default FocusTimer;
-

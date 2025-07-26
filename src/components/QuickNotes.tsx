@@ -56,4 +56,3 @@ const QuickNotes: React.FC = () => {
 };
 
 export default QuickNotes;
-
