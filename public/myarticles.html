@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Articles</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    .audio-player {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #f3f4f6;
+      padding: 0.5rem;
+      box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body class="bg-white text-gray-900">
+  <header class="text-center text-2xl font-bold p-4">📝 My Articles</header>
+  <div class="flex justify-center gap-4 flex-wrap px-4 py-2">
+    <button class="bg-blue-100 hover:bg-blue-200 px-3 py-1 rounded">Productivity</button>
+    <button class="bg-blue-100 hover:bg-blue-200 px-3 py-1 rounded">Faith</button>
+    <button class="bg-blue-100 hover:bg-blue-200 px-3 py-1 rounded">Linux</button>
+  </div>
+  <main class="p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    <article class="border p-4 rounded shadow hover:shadow-lg transition">
+      <h2 class="text-lg font-semibold">Sample Article 1</h2>
+      <p>Intro to clarity-driven productivity systems with simple daily habits.</p>
+    </article>
+    <article class="border p-4 rounded shadow hover:shadow-lg transition">
+      <h2 class="text-lg font-semibold">Sample Article 2</h2>
+      <p>Using a Linux setup for focused creative work and distraction-free flow.</p>
+    </article>
+  </main>
+  <div class="audio-player">
+    <audio controls class="w-full">
+      <source src="sample.mp3" type="audio/mpeg" />
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+</body>
+</html>
