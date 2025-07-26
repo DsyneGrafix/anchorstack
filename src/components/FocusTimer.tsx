@@ -1,46 +1,172 @@
-import React, { useState, useEffect } from 'react';
+// src/components/FocusTimer.tsx
+import React, { useEffect } from 'react'
+import { Play, Pause, RotateCcw, Coffee, Target } from 'lucide-react'
+import { useTimerStore } from '@/store/useTimerStore'
+import { Button } from '@/components/ui/Button'
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card'
 
-const FocusTimer: React.FC = () => {
-  const [secondsLeft, setSecondsLeft] = useState(1500);
-  const [isRunning, setIsRunning] = useState(false);
+export const FocusTimer: React.FC = () => {
+  const {
+    timeLeft,
+    isActive,
+    currentSession,
+    sessionsCompleted,
+    isBreak,
+    startTimer,
+    pauseTimer,
+    resetTimer,
+    tick
+  } = useTimerStore()
 
   useEffect(() => {
-    let interval: NodeJS.Timeout;
-    if (isRunning && secondsLeft > 0) {
+    let interval: NodeJS.Timeout | null = null
+    
+    if (isActive && timeLeft > 0) {
       interval = setInterval(() => {
-        setSecondsLeft((prev) => prev - 1);
-      }, 1000);
-    } else {
-      clearInterval(interval);
+        tick()
+      }, 1000)
+    } else if (timeLeft === 0) {
+      resetTimer()
     }
-    return () => clearInterval(interval);
-  }, [isRunning, secondsLeft]);
 
-  const toggleTimer = () => setIsRunning(!isRunning);
-  const resetTimer = () => {
-    setIsRunning(false);
-    setSecondsLeft(1500);
-  };
+    return () => {
+      if (interval) clearInterval(interval)
+    }
+  }, [isActive, timeLeft, tick, resetTimer])
 
-  const formatTime = (sec: number): string =>
-    \`\${Math.floor(sec / 60).toString().padStart(2, '0')}:\${(sec % 60)
-      .toString()
-      .padStart(2, '0')}\`;
+  const formatTime = (seconds: number): string => {
+    const mins = Math.floor(seconds / 60)
+    const secs = seconds % 60
+    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`
+  }
+
+  const getSessionType = () => {
+    if (isBreak) {
+      return sessionsCompleted % 4 === 0 && sessionsCompleted > 0 ? 'Long Break' : 'Short Break'
+    }
+    return 'Focus Session'
+  }
+
+  const getProgress = () => {
+    const totalTime = isBreak 
+      ? (sessionsCompleted % 4 === 0 && sessionsCompleted > 0 ? 15 * 60 : 5 * 60)
+      : 25 * 60
+    return ((totalTime - timeLeft) / totalTime) * 100
+  }
 
   return (
-    <div className="bg-white dark:bg-gray-900 rounded-xl p-4 shadow w-full max-w-md mx-auto mt-4">
-      <h2 className="text-lg font-bold mb-2">⏱️ Focus Timer</h2>
-      <div className="text-4xl font-mono text-center mb-4">{formatTime(secondsLeft)}</div>
-      <div className="flex justify-center gap-4">
-        <button onClick={toggleTimer} className="bg-blue-600 text-white px-4 py-2 rounded">
-          {isRunning ? 'Pause' : 'Start'}
-        </button>
-        <button onClick={resetTimer} className="bg-gray-400 text-white px-4 py-2 rounded">
-          Reset
-        </button>
-      </div>
-    </div>
-  );
-};
+    <Card className="bg-white border-2 border-primary-200">
+      <CardHeader className="text-center">
+        <CardTitle className="flex items-center justify-center space-x-2">
+          {isBreak ? (
+            <Coffee className="w-5 h-5 text-green-500" />
+          ) : (
+            <Target className="w-5 h-5 text-primary-500" />
+          )}
+          <span className={isBreak ? 'text-green-600' : 'text-primary-600'}>
+            {getSessionType()}
+          </span>
+        </CardTitle>
+      </CardHeader>
+      
+      <CardContent className="space-y-6">
+        <div className="text-center">
+          <div className="relative inline-block">
+            <svg className="w-48 h-48 transform -rotate-90" viewBox="0 0 100 100">
+              <circle
+                cx="50"
+                cy="50"
+                r="45"
+                fill="none"
+                stroke="#e5e7eb"
+                strokeWidth="4"
+              />
+              <circle
+                cx="50"
+                cy="50"
+                r="45"
+                fill="none"
+                stroke={isBreak ? "#10b981" : "#3b82f6"}
+                strokeWidth="4"
+                strokeLinecap="round"
+                strokeDasharray={`${2 * Math.PI * 45}`}
+                strokeDashoffset={`${2 * Math.PI * 45 * (1 - getProgress() / 100)}`}
+                className="transition-all duration-1000 ease-in-out"
+              />
+            </svg>
+            
+            <div className="absolute inset-0 flex flex-col items-center justify-center">
+              <div className="text-4xl font-bold text-anchor-900 font-mono">
+                {formatTime(timeLeft)}
+              </div>
+              <div className="text-sm text-anchor-600 mt-1">
+                Session {currentSession}
+              </div>
+            </div>
+          </div>
+        </div>
 
-export default FocusTimer;
+        <div className="flex justify-center space-x-4">
+          <Button
+            onClick={isActive ? pauseTimer : startTimer}
+            className={`px-6 py-2 ${
+              isActive 
+                ? 'bg-yellow-500 hover:bg-yellow-600 text-white' 
+                : isBreak 
+                  ? 'bg-green-500 hover:bg-green-600 text-white'
+                  : 'bg-primary-500 hover:bg-primary-600 text-white'
+            }`}
+          >
+            {isActive ? (
+              <>
+                <Pause className="w-4 h-4 mr-2" />
+                Pause
+              </>
+            ) : (
+              <>
+                <Play className="w-4 h-4 mr-2" />
+                Start
+              </>
+            )}
+          </Button>
+          
+          <Button
+            onClick={resetTimer}
+            variant="outline"
+            className="px-6 py-2"
+          >
+            <RotateCcw className="w-4 h-4 mr-2" />
+            Reset
+          </Button>
+        </div>
+
+        <div className="grid grid-cols-2 gap-4 pt-4 border-t border-anchor-200">
+          <div className="text-center">
+            <div className="text-2xl font-bold text-primary-600">
+              {sessionsCompleted}
+            </div>
+            <div className="text-sm text-anchor-600">Completed</div>
+          </div>
+          <div className="text-center">
+            <div className="text-2xl font-bold text-green-600">
+              {Math.floor(sessionsCompleted / 4)}
+            </div>
+            <div className="text-sm text-anchor-600">Cycles Done</div>
+          </div>
+        </div>
+
+        <div className="text-center p-3 bg-anchor-50 rounded-md">
+          <p className="text-sm text-anchor-600">
+            Up next: {
+              isBreak 
+                ? 'Focus Session' 
+                : sessionsCompleted > 0 && (sessionsCompleted + 1) % 4 === 0
+                  ? 'Long Break (15 min)'
+                  : 'Short Break (5 min)'
+            }
+          </p>
+        </div>
+      </CardContent>
+    </Card>
+  )
+}
