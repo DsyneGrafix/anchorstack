@@ -1,50 +1,49 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 
 const FocusTimer: React.FC = () => {
-  const [seconds, setSeconds] = useState(25 * 60)
-  const [isRunning, setIsRunning] = useState(false)
+  const [secondsLeft, setSecondsLeft] = useState(1500); // 25 min
+  const [isRunning, setIsRunning] = useState(false);
 
   useEffect(() => {
-    let timer: NodeJS.Timeout
-    if (isRunning) {
-      timer = setInterval(() => {
-        setSeconds((prev) => (prev > 0 ? prev - 1 : 0))
-      }, 1000)
+    let interval: NodeJS.Timeout | null = null;
+    if (isRunning && secondsLeft > 0) {
+      interval = setInterval(() => {
+        setSecondsLeft((prev) => prev - 1);
+      }, 1000);
+    } else if (interval) {
+      clearInterval(interval);
     }
-    return () => clearInterval(timer)
-  }, [isRunning])
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [isRunning, secondsLeft]);
 
-  const toggleTimer = () => setIsRunning(!isRunning)
+  const toggleTimer = () => setIsRunning(!isRunning);
   const resetTimer = () => {
-    setSeconds(25 * 60)
-    setIsRunning(false)
-  }
+    setIsRunning(false);
+    setSecondsLeft(1500);
+  };
 
-  const formatTime = (s: number) => {
-    const m = Math.floor(s / 60)
-    const sec = s % 60
-    return `${m.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`
-  }
+  const formatTime = (sec: number): string =>
+    `${Math.floor(sec / 60)
+      .toString()
+      .padStart(2, '0')}:${(sec % 60).toString().padStart(2, '0')}`;
 
   return (
-    <div className="p-6 bg-white rounded-xl shadow text-center">
-      <h2 className="text-xl font-semibold mb-4">⏱️ Focus Timer</h2>
-      <p className="text-4xl font-mono mb-6">{formatTime(seconds)}</p>
-      <button
-        onClick={toggleTimer}
-        className="bg-anchor-600 hover:bg-anchor-700 text-white px-4 py-2 rounded mr-2"
-      >
-        {isRunning ? 'Pause' : 'Start'}
-      </button>
-      <button
-        onClick={resetTimer}
-        className="bg-gray-300 hover:bg-gray-400 text-black px-4 py-2 rounded"
-      >
-        Reset
-      </button>
+    <div className="bg-white dark:bg-gray-900 rounded-xl p-4 shadow w-full max-w-md mx-auto mt-4">
+      <h2 className="text-lg font-bold mb-2">⏱️ Focus Timer</h2>
+      <div className="text-4xl font-mono text-center mb-4">{formatTime(secondsLeft)}</div>
+      <div className="flex justify-center gap-4">
+        <button onClick={toggleTimer} className="bg-blue-600 text-white px-4 py-2 rounded">
+          {isRunning ? 'Pause' : 'Start'}
+        </button>
+        <button onClick={resetTimer} className="bg-gray-400 text-white px-4 py-2 rounded">
+          Reset
+        </button>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default FocusTimer
+export default FocusTimer;
 

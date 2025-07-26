@@ -1,54 +1,59 @@
-import { useState } from 'react'
+import React, { useState } from 'react';
+
+interface Note {
+  id: string;
+  content: string;
+}
 
 const QuickNotes: React.FC = () => {
-  const [note, setNote] = useState('')
-  const [notes, setNotes] = useState<string[]>([])
+  const [notes, setNotes] = useState<Note[]>([]);
+  const [noteText, setNoteText] = useState('');
 
   const addNote = () => {
-    if (!note.trim()) return
-    setNotes([note, ...notes])
-    setNote('')
-  }
+    if (!noteText.trim()) return;
+    const newNote: Note = {
+      id: Date.now().toString(),
+      content: noteText.trim(),
+    };
+    setNotes((prev) => [...prev, newNote]);
+    setNoteText('');
+  };
 
-  const deleteNote = (i: number) => {
-    setNotes(notes.filter((_, idx) => idx !== i))
-  }
+  const deleteNote = (id: string) => {
+    setNotes((prev) => prev.filter((note) => note.id !== id));
+  };
 
   return (
-    <div className="p-6 bg-white rounded-xl shadow mt-6">
-      <h2 className="text-xl font-semibold mb-4">📝 Quick Notes</h2>
+    <div className="bg-white dark:bg-gray-900 rounded-xl p-4 shadow w-full max-w-md mx-auto mt-4">
+      <h2 className="text-lg font-bold mb-2">📝 Quick Notes</h2>
       <textarea
-        value={note}
-        onChange={(e) => setNote(e.target.value)}
+        value={noteText}
+        onChange={(e) => setNoteText(e.target.value)}
+        className="w-full p-2 border border-gray-300 rounded mb-2"
         placeholder="Write a quick note..."
-        className="w-full p-3 rounded border border-gray-300 mb-4"
       />
-      <button
-        onClick={addNote}
-        className="bg-anchor-600 hover:bg-anchor-700 text-white px-4 py-2 rounded"
-      >
+      <button onClick={addNote} className="bg-blue-600 text-white px-4 py-2 rounded w-full mb-4">
         Add Note
       </button>
-
-      <ul className="mt-6 space-y-2">
-        {notes.map((n, i) => (
+      <ul className="space-y-2">
+        {notes.map((note) => (
           <li
-            key={i}
-            className="flex justify-between items-center bg-neutral-100 px-4 py-2 rounded"
+            key={note.id}
+            className="flex justify-between items-center bg-gray-100 dark:bg-gray-800 px-3 py-2 rounded"
           >
-            <span>{n}</span>
+            <span>{note.content}</span>
             <button
-              onClick={() => deleteNote(i)}
-              className="text-sm text-red-600 hover:underline"
+              onClick={() => deleteNote(note.id)}
+              className="text-red-500 hover:text-red-700"
             >
-              Delete
+              ✕
             </button>
           </li>
         ))}
       </ul>
     </div>
-  )
-}
+  );
+};
 
-export default QuickNotes
+export default QuickNotes;
 
