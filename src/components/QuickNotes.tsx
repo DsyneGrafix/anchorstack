@@ -1,22 +1,24 @@
 import type { Note } from "@/types"
-
 import React, { useState } from "react"
 import { nanoid } from "nanoid"
 import { useNotesStore } from "@/store/useNotesStore"
 
+const QuickNotes: React.FC = () => {
+  const { notes, addNote, deleteNote } = useNotesStore()
+  const [noteText, setNoteText] = useState("")
+
   const handleAdd = () => {
-    if (noteText.trim() === "") return;
+    if (noteText.trim() === "") return
 
     addNote({
       id: nanoid(),
       content: noteText.trim(),
       createdAt: new Date().toISOString(),
       timestamp: Date.now(),
-    });
+    })
 
-    setNoteText("");
-  };
-
+    setNoteText("")
+  }
 
   return (
     <div className="bg-white rounded-xl p-4 shadow-md w-full max-w-md mx-auto">
@@ -58,3 +60,4 @@ import { useNotesStore } from "@/store/useNotesStore"
 }
 
 export default QuickNotes
+
