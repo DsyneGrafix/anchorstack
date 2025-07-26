@@ -11,10 +11,13 @@ const QuickNotes: React.FC = () => {
   const handleAdd = () => {
     if (noteText.trim() === "") return
 
-    addNote({
-      id: nanoid(),
-      content: noteText.trim(),
-     timestamp: Date.now() // ✅ returns a number
+addNote({
+  id,
+  content,
+  createdAt: new Date().toISOString(), // string as expected
+  timestamp: Date.now(), // number as expected
+})
+
 
     })
 
