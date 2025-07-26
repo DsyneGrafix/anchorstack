@@ -46,6 +46,9 @@ const Button = ({ children, onClick, variant = 'primary', size = 'md', className
     </button>
   );
 };
+const App = () => <Layout />;
+export default App;
+
 
 const Card = ({ children, className = '', ...props }) => (
   <div className={cn('bg-white rounded-lg border border-gray-200 shadow-sm', className)} {...props}>
