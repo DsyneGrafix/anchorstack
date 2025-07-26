@@ -1,167 +1,61 @@
-// src/components/QuickNotes.tsx
-import React, { useState } from 'react'
-import { Plus, Edit3, Trash2, ArrowRight } from 'lucide-react'
-import { useNotesStore } from '@/store/useNotesStore'
-import { Button } from '@/components/ui/Button'
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card'
-import { Link } from 'react-router-dom'
 
-export const QuickNotes: React.FC = () => {
-  const { notes, addNote, updateNote, deleteNote } = useNotesStore()
-  const [newNoteContent, setNewNoteContent] = useState('')
-  const [isAdding, setIsAdding] = useState(false)
+import React, { useState } from "react"
+import { nanoid } from "nanoid"
+import { useNotesStore } from "@/store/useNotesStore"
 
-  const recentNotes = notes.slice(0, 3)
+const QuickNotes: React.FC = () => {
+  const { notes, addNote, deleteNote } = useNotesStore()
+  const [noteText, setNoteText] = useState("")
 
-  const handleAddNote = () => {
-    if (newNoteContent.trim()) {
-      addNote(newNoteContent.trim())
-      setNewNoteContent('')
-      setIsAdding(false)
-    }
-  }
+  const handleAdd = () => {
+    if (noteText.trim() === "") return
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && e.ctrlKey) {
-      handleAddNote()
-    } else if (e.key === 'Escape') {
-      setIsAdding(false)
-      setNewNoteContent('')
-    }
-  }
+    addNote({
+      id: nanoid(),
+      content: noteText.trim(),
+      timestamp: new Date().toISOString(),
+    })
 
-  const truncateText = (text: string, maxLength: number = 80) => {
-    return text.length > maxLength ? text.substring(0, maxLength) + '...' : text
+    setNoteText("")
   }
 
   return (
-    <Card className="bg-white border-2 border-anchor-200">
-      <CardHeader>
-        <div className="flex items-center justify-between">
-          <CardTitle className="flex items-center space-x-2">
-            <Edit3 className="w-5 h-5 text-anchor-600" />
-            <span>Quick Notes</span>
-          </CardTitle>
-          <div className="flex items-center space-x-2">
-            <Button
-              onClick={() => setIsAdding(true)}
-              size="sm"
-              variant="ghost"
-              className="text-primary-600 hover:text-primary-700"
-            >
-              <Plus className="w-4 h-4" />
-            </Button>
-            <Link to="/notes">
-              <Button
-                size="sm"
-                variant="ghost"
-                className="text-anchor-600 hover:text-anchor-700"
-              >
-                <ArrowRight className="w-4 h-4" />
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </CardHeader>
-      
-      <CardContent className="space-y-4">
-        {isAdding && (
-          <div className="space-y-2">
-            <textarea
-              value={newNoteContent}
-              onChange={(e) => setNewNoteContent(e.target.value)}
-              onKeyDown={handleKeyPress}
-              placeholder="Capture a quick thought... (Ctrl+Enter to save, Esc to cancel)"
-              className="w-full p-3 text-sm border border-anchor-200 rounded-md resize-none focus:outline-none focus:ring-2 focus:ring-primary-500"
-              rows={3}
-              autoFocus
-            />
-            <div className="flex justify-end space-x-2">
-              <Button
-                onClick={() => {
-                  setIsAdding(false)
-                  setNewNoteContent('')
-                }}
-                size="sm"
-                variant="ghost"
-              >
-                Cancel
-              </Button>
-              <Button
-                onClick={handleAddNote}
-                size="sm"
-                disabled={!newNoteContent.trim()}
-              >
-                Save
-              </Button>
-            </div>
-          </div>
-        )}
+    <div className="bg-white rounded-xl p-4 shadow-md w-full max-w-md mx-auto">
+      <h2 className="text-xl font-bold mb-4 text-anchor-800">📝 Quick Notes</h2>
 
-        {recentNotes.length === 0 ? (
-          <div className="text-center py-8">
-            <Edit3 className="w-12 h-12 text-anchor-300 mx-auto mb-3" />
-            <p className="text-anchor-500 text-sm mb-3">
-              No notes yet. Capture your first thought!
-            </p>
-            <Button
-              onClick={() => setIsAdding(true)}
-              size="sm"
-              className="bg-primary-500 hover:bg-primary-600 text-white"
+      <textarea
+        value={noteText}
+        onChange={(e) => setNoteText(e.target.value)}
+        placeholder="Type your note here..."
+        className="w-full border rounded-md p-2 mb-2"
+        rows={3}
+      />
+
+      <button
+        onClick={handleAdd}
+        className="bg-anchor-600 hover:bg-anchor-700 text-white px-4 py-2 rounded-md"
+      >
+        Add Note
+      </button>
+
+      <ul className="mt-4 space-y-2">
+        {notes.map((note) => (
+          <li key={note.id} className="bg-neutral-100 rounded-md p-3 relative">
+            <button
+              onClick={() => deleteNote(note.id)}
+              className="absolute top-2 right-2 text-red-500 text-sm"
             >
-              <Plus className="w-4 h-4 mr-2" />
-              Create Note
-            </Button>
-          </div>
-        ) : (
-          <div className="space-y-3">
-            {recentNotes.map((note) => (
-              <div
-                key={note.id}
-                className="group p-3 bg-anchor-50 rounded-md border border-anchor-100 hover:border-primary-200 transition-colors"
-              >
-                <div className="flex justify-between items-start">
-                  <p className="text-sm text-anchor-700 flex-1 leading-relaxed">
-                    {truncateText(note.content || 'Empty note')}
-                  </p>
-                  <button
-                    onClick={() => deleteNote(note.id)}
-                    className="opacity-0 group-hover:opacity-100 ml-2 p-1 text-red-400 hover:text-red-600 transition-all"
-                  >
-                    <Trash2 className="w-3 h-3" />
-                  </button>
-                </div>
-                <div className="mt-2 text-xs text-anchor-500">
-                  {new Date(note.updatedAt).toLocaleDateString('en-US', {
-                    month: 'short',
-                    day: 'numeric',
-                    hour: '2-digit',
-                    minute: '2-digit'
-                  })}
-                </div>
-              </div>
-            ))}
-            
-            {notes.length > 3 && (
-              <Link to="/notes">
-                <div className="text-center py-2">
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="text-primary-600 hover:text-primary-700"
-                  >
-                    View all {notes.length} notes
-                    <ArrowRight className="w-4 h-4 ml-1" />
-                  </Button>
-                </div>
-              </Link>
-            )}
-          </div>
-        )}
-      </CardContent>
-    </Card>
+              ✕
+            </button>
+            <p className="text-sm">{note.content}</p>
+            <p className="text-xs text-gray-400 mt-1">
+              {note.timestamp ? new Date(note.timestamp).toLocaleString() : "No timestamp"}
+            </p>
+          </li>
+        ))}
+      </ul>
+    </div>
   )
 }
 
-export default QuickNotes;
-
+export default QuickNotes
