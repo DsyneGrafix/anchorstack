@@ -10,13 +10,7 @@ export interface VaultProduct {
   price?: number
 }
 
-export interface Note {
-  id: string
-  content: string
-  createdAt: number
-  updatedAt: number
-  tags?: string[]
-}
+
 
 export interface TimerSession {
   id: string
@@ -39,8 +33,9 @@ export interface User {
   }
 }
 
-export interface AppState {
-  user: User | null
-  isAuthenticated: boolean
-  theme: 'light' | 'dark'
+export type Note = {
+  id: string
+  content: string
+  createdAt: string
 }
+
