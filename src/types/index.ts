@@ -32,10 +32,10 @@ export interface User {
     notifications: boolean
   }
 }
-
 export type Note = {
   id: string
   content: string
   createdAt: string
+  timestamp: number
 }
 
