@@ -1,10 +1,7 @@
 import { create } from "zustand"
 
-export type Note = {
-  id: string
-  content: string
-  updatedAt?: string
-}
+import type { Note } from "@/types"
+
 
 export type NotesState = {
   notes: Note[]

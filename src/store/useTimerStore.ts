@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+import type { Note } from "@/types"
 
 export type TimerState = {
   timeLeft: number
