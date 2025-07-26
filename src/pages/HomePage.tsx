@@ -1,4 +1,5 @@
-import VaultTile from "@/components/VaultTile"
+import { VaultTile } from "@/components/VaultTile"
+
 import HeroSection from "@/components/HeroSection"
 
 

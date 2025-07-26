@@ -1,8 +1,6 @@
-import VaultTile from "@/components/VaultTile"
+import { VaultTile } from "@/components/VaultTile"
 import Layout from "@/components/Layout"
 import type { VaultProduct } from "@/types"
-
-
 
 export default function VaultPage() {
   return (
@@ -48,12 +46,7 @@ export default function VaultPage() {
           />
         </div>
       </div>
-
-  )
-
     </Layout>
   )
 }
-
-
 
