@@ -12,11 +12,12 @@ const QuickNotes: React.FC = () => {
     if (noteText.trim() === "") return
 
 addNote({
-  id,
-  content,
-  createdAt: new Date().toISOString(), // string as expected
-  timestamp: Date.now(), // number as expected
+  id: nanoid(),
+  content: noteText.trim(),
+  createdAt: new Date().toISOString(),
+  timestamp: Date.now(),
 })
+
 
 
     })
