@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Home, Clock, FileText, Settings, Anchor, Play, Pause, RotateCcw, Plus, Search, Calendar, RefreshCw, ExternalLink } from 'lucide-react';
+import { Home, Clock, FileText, Settings, Anchor, Play, Pause, RotateCcw, Plus, Search, Calendar, RefreshCw, BookOpen, Download, CheckCircle, ExternalLink } from 'lucide-react';
 
 // Utility function
-const cn = (...classes: (string | undefined)[]) => classes.filter(Boolean).join(' ');
+const cn = (...classes) => classes.filter(Boolean).join(' ');
 
 // Types
 interface Note {
@@ -22,25 +22,8 @@ interface VaultProduct {
 }
 
 // UI Components
-interface ButtonProps {
-  children: React.ReactNode;
-  onClick?: () => void;
-  variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
-  size?: 'sm' | 'md' | 'lg';
-  className?: string;
-  type?: 'button' | 'submit';
-}
-
-const Button: React.FC<ButtonProps> = ({ 
-  children, 
-  onClick, 
-  variant = 'primary', 
-  size = 'md', 
-  className = '',
-  type = 'button',
-  ...props 
-}) => {
-  const baseClasses = 'inline-flex items-center justify-center rounded-md font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2';
+const Button = ({ children, onClick, variant = 'primary', size = 'md', className = '', ...props }) => {
+  const baseClasses = 'inline-flex items-center justify-center rounded-md font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2';
   const variants = {
     primary: 'bg-blue-600 text-white hover:bg-blue-700',
     secondary: 'bg-gray-200 text-gray-900 hover:bg-gray-300',
@@ -55,7 +38,6 @@ const Button: React.FC<ButtonProps> = ({
   
   return (
     <button
-      type={type}
       className={cn(baseClasses, variants[variant], sizes[size], className)}
       onClick={onClick}
       {...props}
@@ -64,61 +46,49 @@ const Button: React.FC<ButtonProps> = ({
     </button>
   );
 };
+const App = () => <Layout />;
+export default App;
 
-const Card: React.FC<{ children: React.ReactNode; className?: string }> = ({ 
-  children, 
-  className = '', 
-  ...props 
-}) => (
+
+const Card = ({ children, className = '', ...props }) => (
   <div className={cn('bg-white rounded-lg border border-gray-200 shadow-sm', className)} {...props}>
     {children}
   </div>
 );
 
-const CardHeader: React.FC<{ children: React.ReactNode; className?: string }> = ({ 
-  children, 
-  className = '', 
-  ...props 
-}) => (
+const CardHeader = ({ children, className = '', ...props }) => (
   <div className={cn('px-6 py-4 border-b border-gray-200', className)} {...props}>
     {children}
   </div>
 );
 
-const CardTitle: React.FC<{ children: React.ReactNode; className?: string }> = ({ 
-  children, 
-  className = '', 
-  ...props 
-}) => (
+const CardTitle = ({ children, className = '', ...props }) => (
   <h3 className={cn('text-lg font-semibold text-gray-900', className)} {...props}>
     {children}
   </h3>
 );
 
-const CardContent: React.FC<{ children: React.ReactNode; className?: string }> = ({ 
-  children, 
-  className = '', 
-  ...props 
-}) => (
+const CardContent = ({ children, className = '', ...props }) => (
   <div className={cn('px-6 py-4', className)} {...props}>
     {children}
   </div>
 );
 
-// Timer Store (simplified)
+// Timer Store (simplified Zustand-like)
 const useTimerStore = () => {
   const [timeLeft, setTimeLeft] = useState(25 * 60);
   const [isRunning, setIsRunning] = useState(false);
-  const [mode, setMode] = useState<'focus' | 'break'>('focus');
+  const [mode, setMode] = useState('focus');
 
   useEffect(() => {
-    let interval: NodeJS.Timeout;
+    let interval;
     if (isRunning && timeLeft > 0) {
       interval = setInterval(() => {
         setTimeLeft(prev => prev - 1);
       }, 1000);
     } else if (timeLeft === 0) {
       setIsRunning(false);
+      // Auto-switch modes
       if (mode === 'focus') {
         setMode('break');
         setTimeLeft(5 * 60);
@@ -137,18 +107,14 @@ const useTimerStore = () => {
     setTimeLeft(mode === 'focus' ? 25 * 60 : 5 * 60);
   };
 
-  return { timeLeft, isRunning, mode, start, pause, reset };
+  return { timeLeft, isRunning, mode, start, pause, reset, setMode };
 };
 
 // Notes Store (simplified)
 const useNotesStore = () => {
-  const [notes, setNotes] = useState<Note[]>(() => {
-    try {
-      const saved = localStorage.getItem('anchorstack-notes');
-      return saved ? JSON.parse(saved) : [];
-    } catch {
-      return [];
-    }
+  const [notes, setNotes] = useState(() => {
+    const saved = localStorage.getItem('anchorstack-notes');
+    return saved ? JSON.parse(saved) : [];
   });
 
   useEffect(() => {
@@ -156,7 +122,7 @@ const useNotesStore = () => {
   }, [notes]);
 
   const addNote = () => {
-    const newNote: Note = {
+    const newNote = {
       id: Date.now().toString(),
       content: '',
       createdAt: new Date().toISOString(),
@@ -166,7 +132,7 @@ const useNotesStore = () => {
     return newNote.id;
   };
 
-  const updateNote = (id: string, content: string) => {
+  const updateNote = (id, content) => {
     setNotes(prev => prev.map(note => 
       note.id === id 
         ? { ...note, content, updatedAt: new Date().toISOString() }
@@ -174,7 +140,7 @@ const useNotesStore = () => {
     ));
   };
 
-  const deleteNote = (id: string) => {
+  const deleteNote = (id) => {
     setNotes(prev => prev.filter(note => note.id !== id));
   };
 
@@ -182,10 +148,10 @@ const useNotesStore = () => {
 };
 
 // Components
-const FocusTimer: React.FC = () => {
+const FocusTimer = () => {
   const { timeLeft, isRunning, mode, start, pause, reset } = useTimerStore();
 
-  const formatTime = (seconds: number): string => {
+  const formatTime = (seconds) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
     return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
@@ -252,14 +218,15 @@ const FocusTimer: React.FC = () => {
   );
 };
 
-const QuickNotes: React.FC = () => {
+const QuickNotes = () => {
   const { notes, addNote } = useNotesStore();
   const [quickNote, setQuickNote] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (quickNote.trim()) {
-      addNote();
+      const noteId = addNote();
+      // Would update the note content here in real app
       setQuickNote('');
     }
   };
@@ -302,7 +269,7 @@ const QuickNotes: React.FC = () => {
   );
 };
 
-const VaultTile: React.FC<{ product: VaultProduct }> = ({ product }) => {
+const VaultTile = ({ product }) => {
   const tierColors = {
     free: 'border-green-200 bg-green-50',
     premium: 'border-blue-200 bg-blue-50', 
@@ -319,12 +286,12 @@ const VaultTile: React.FC<{ product: VaultProduct }> = ({ product }) => {
     <Card className={`cursor-pointer transition-all hover:shadow-md ${tierColors[product.tier]}`}>
       <CardContent className="p-4">
         <div className="flex justify-between items-start mb-3">
-          <h3 className="font-semibold text-gray-900">{product.title}</h3>
+          <h3 className="font-semibold text-gray-900 line-clamp-2">{product.title}</h3>
           <span className={`px-2 py-1 text-xs font-medium rounded ${tierBadges[product.tier]}`}>
             {product.tier.toUpperCase()}
           </span>
         </div>
-        <p className="text-sm text-gray-600 mb-3">{product.description}</p>
+        <p className="text-sm text-gray-600 mb-3 line-clamp-3">{product.description}</p>
         <div className="flex justify-between items-center">
           <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">
             {product.category}
@@ -337,7 +304,7 @@ const VaultTile: React.FC<{ product: VaultProduct }> = ({ product }) => {
 };
 
 // Real product data
-const vaultProducts: VaultProduct[] = [
+const vaultProducts = [
   {
     id: 'digital-distraction-cleanse',
     title: 'Digital Distraction Cleanse',
@@ -373,7 +340,7 @@ const vaultProducts: VaultProduct[] = [
 ];
 
 // Pages
-const Dashboard: React.FC = () => {
+const Dashboard = () => {
   const quotes = [
     "The way to get started is to quit talking and begin doing. - Walt Disney",
     "Innovation distinguishes between a leader and a follower. - Steve Jobs",
@@ -446,7 +413,7 @@ const Dashboard: React.FC = () => {
   );
 };
 
-const Focus: React.FC = () => {
+const Focus = () => {
   return (
     <div className="max-w-4xl mx-auto space-y-8">
       <div className="text-center">
@@ -498,10 +465,10 @@ const Focus: React.FC = () => {
   );
 };
 
-const Notes: React.FC = () => {
+const Notes = () => {
   const { notes, addNote, updateNote, deleteNote } = useNotesStore();
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedNote, setSelectedNote] = useState<string | null>(null);
+  const [selectedNote, setSelectedNote] = useState(null);
 
   const filteredNotes = notes.filter(note =>
     note.content.toLowerCase().includes(searchTerm.toLowerCase())
@@ -552,7 +519,7 @@ const Notes: React.FC = () => {
                   onClick={() => setSelectedNote(note.id)}
                 >
                   <CardContent className="p-4">
-                    <p className="text-sm text-gray-700 mb-2">
+                    <p className="text-sm text-gray-700 line-clamp-3 mb-2">
                       {note.content || 'Empty note'}
                     </p>
                     <div className="flex items-center text-xs text-gray-500">
@@ -610,14 +577,14 @@ const Notes: React.FC = () => {
   );
 };
 
-const Vault: React.FC = () => {
+const Vault = () => {
   const groupedProducts = vaultProducts.reduce((acc, product) => {
     if (!acc[product.category]) {
       acc[product.category] = [];
     }
     acc[product.category].push(product);
     return acc;
-  }, {} as Record<string, VaultProduct[]>);
+  }, {});
 
   return (
     <div className="space-y-8">
@@ -702,7 +669,7 @@ const Vault: React.FC = () => {
 };
 
 // Layout Component with built-in routing
-const Layout: React.FC = () => {
+const Layout = () => {
   const [currentPage, setCurrentPage] = useState('dashboard');
   
   const navigation = [
@@ -734,4 +701,56 @@ const Layout: React.FC = () => {
             <nav className="hidden md:flex space-x-8">
               {navigation.map((item) => (
                 <button
-                  key={item.name
+                  key={item.name}
+                  onClick={() => setCurrentPage(item.id)}
+                  className={cn(
+                    'flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors',
+                    currentPage === item.id
+                      ? 'bg-blue-100 text-blue-700'
+                      : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                  )}
+                >
+                  <item.icon className="w-4 h-4" />
+                  <span>{item.name}</span>
+                </button>
+              ))}
+            </nav>
+
+            <button className="p-2 text-gray-600 hover:text-gray-900">
+              <Settings className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <nav className="md:hidden bg-white border-b border-gray-200">
+        <div className="flex justify-around py-2">
+          {navigation.map((item) => (
+            <button
+              key={item.name}
+              onClick={() => setCurrentPage(item.id)}
+              className={cn(
+                'flex flex-col items-center space-y-1 px-3 py-2 rounded-md text-xs font-medium transition-colors',
+                currentPage === item.id
+                  ? 'text-blue-700'
+                  : 'text-gray-600'
+              )}
+            >
+              <item.icon className="w-5 h-5" />
+              <span>{item.name}</span>
+            </button>
+          ))}
+        </div>
+      </nav>
+
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {renderPage()}
+      </main>
+    </div>
+  );
+};
+
+// Main App
+function App() {
+  return <Layout />;
+}
