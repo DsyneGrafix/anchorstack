@@ -14,7 +14,8 @@ const QuickNotes: React.FC = () => {
     addNote({
       id: nanoid(),
       content: noteText.trim(),
-      timestamp: new Date().toISOString(),
+     timestamp: Date.now() // ✅ returns a number
+
     })
 
     setNoteText("")
