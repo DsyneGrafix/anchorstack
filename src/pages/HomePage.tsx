@@ -1,5 +1,5 @@
-import HeroSection from '../components/HeroSection'
-import VaultTile from '../components/VaultTile'
+import VaultTile from "@/components/VaultTile"
+
 
 
 

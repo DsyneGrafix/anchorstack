@@ -1,6 +1,7 @@
 import Layout from '../layouts/Layout'
-import FocusTimer from '../components/FocusTimer'
-import QuickNotes from '../components/QuickNotes'
+import FocusTimer from "@/components/FocusTimer"
+import QuickNotes from "@/components/QuickNotes"
+
 
 export default function DashboardPage() {
   return (

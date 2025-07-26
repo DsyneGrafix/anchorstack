@@ -9,7 +9,7 @@ export interface Note {
   updatedAt: number
 }
 
-interface NotesState {
+export interface NotesState {
   notes: Note[]
   addNote: (content?: string) => void
   updateNote: (id: string, content: string) => void
@@ -35,7 +35,7 @@ export const useNotesStore = create<NotesState>()(
         }
         
         set((state) => ({
-          notes: [newNote, ...state.notes] // Add to beginning for chronological order
+          notes: [newNote, ...state.notes]
         }))
       },
 
@@ -67,7 +67,6 @@ export const useNotesStore = create<NotesState>()(
     }),
     {
       name: 'anchorstack-notes',
-      // Persist everything for notes
       version: 1
     }
   )

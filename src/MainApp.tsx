@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import FocusTimer from '@/components/FocusTimer'
-import QuickNotes from '@/components/QuickNotes'
+import FocusTimer from "@/components/FocusTimer"
+import QuickNotes from "@/components/QuickNotes"
+
 
 const quotes = [
   "Clarity comes when you stop forcing the answer.",

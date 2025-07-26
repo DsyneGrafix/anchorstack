@@ -170,3 +170,5 @@ export const FocusTimer: React.FC = () => {
     </Card>
   )
 }
+export default FocusTimer;
+

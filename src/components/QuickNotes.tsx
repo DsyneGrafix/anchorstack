@@ -162,3 +162,6 @@ export const QuickNotes: React.FC = () => {
     </Card>
   )
 }
+
+export default QuickNotes;
+

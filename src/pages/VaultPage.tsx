@@ -1,5 +1,5 @@
-import VaultTile from '../components/VaultTile'
-import Layout from '../layouts/Layout'
+import VaultTile from "@/components/VaultTile"
+
 
 export default function VaultPage() {
   return (
@@ -48,3 +48,10 @@ export default function VaultPage() {
     </Layout>
   )
 }
+type VaultTileProps = {
+  product: VaultProduct;
+};
+
+export default VaultTile;
+
+
