@@ -1,19 +1,16 @@
-export type VaultTileProps = {
-  title: string
-  description: string
-  image: string
-  ctaLink: string
+import React from 'react';
+
+export interface VaultTileProps {
+  title: string;
+  tier: 'free' | 'premium' | 'exclusive';
 }
 
-export const VaultTile = ({ title, description, image, ctaLink }: VaultTileProps) => (
-  <div className="rounded-xl shadow-md overflow-hidden bg-white">
-    <img src={image} alt={title} className="w-full h-48 object-cover" />
-    <div className="p-4">
+export const VaultTile: React.FC<VaultTileProps> = ({ title, tier }) => {
+  return (
+    <div className="border rounded-xl p-4 shadow-md mb-4">
       <h3 className="text-xl font-semibold">{title}</h3>
-      <p className="text-sm text-gray-600 mt-2 mb-4">{description}</p>
-      <a href={ctaLink} className="text-anchor-600 hover:underline font-medium">
-        View Product →
-      </a>
+      <p className="text-sm text-gray-600 capitalize">Access Level: {tier}</p>
     </div>
-  </div>
-)
+  );
+};
+
