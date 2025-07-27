@@ -18,18 +18,21 @@ export default function HomePage() {
         <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           <VaultTile
             title="Calm Clarity Kit"
+            tier="free"
             description="7-day toolkit to restore focus and reset your mind."
             image="/assets/products/calm-kit.jpg"
             ctaLink="https://grafixartistry6.gumroad.com/l/nupwf"
           />
           <VaultTile
             title="Momentum Mapping Toolkit"
-            description="Plan your week with purpose using our printable focus maps."
+             tier="exclusive"
+              description="Plan your week with purpose using our printable focus maps."
             image="/assets/products/momentum-mapping.jpg"
             ctaLink="https://grafixartistry6.gumroad.com/l/npruu"
           />
           <VaultTile
             title="Work-Life Integration Mastery"
+            tier="premium"
             description="Reclaim your time, energy, and attention with biblical clarity."
             image="/assets/products/work-life.jpg"
             ctaLink="https://grafixartistry6.gumroad.com/l/lapqw"
