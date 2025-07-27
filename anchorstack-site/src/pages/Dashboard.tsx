@@ -2,9 +2,7 @@ import React, { useState, useEffect } from 'react';
 import FocusTimer from '../components/FocusTimer';
 import QuickNotes from '../components/QuickNotes'
 
-...
 
-<QuickNotes />
 
 const Dashboard: React.FC = () => {
   const [quoteIndex, setQuoteIndex] = useState(0);
