@@ -5,7 +5,10 @@ type VaultProduct = {
   id: string
   title: string
   description: string
-  tier: 'free' | 'premium' | 'exclusive'
+  tier="premium" // instead of "mid tier"
+  tier="exclusive" // instead of "top tier"
+
+
   url: string
   category: string
 }
