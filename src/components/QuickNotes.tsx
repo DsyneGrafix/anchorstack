@@ -8,7 +8,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card'
 interface Note {
   id: string
   content: string
-  createdAt: number
+  createdAt: string
   timestamp: number
 }
 
@@ -22,12 +22,13 @@ const QuickNotes: React.FC = () => {
   const handleAdd = () => {
     const text = newNoteContent.trim()
     if (!text) return
+
     addNote({
-  id: crypto.randomUUID(),
-  content: text,
-  createdAt: new Date().toISOString(),
-  timestamp: Date.now()
-});
+      id: crypto.randomUUID(),
+      content: text,
+      createdAt: new Date().toISOString(),
+      timestamp: Date.now(),
+    })
 
     setNewNoteContent('')
     setIsAdding(false)
@@ -36,12 +37,13 @@ const QuickNotes: React.FC = () => {
   const handleSaveEdit = (id: string) => {
     const text = editingContent.trim()
     if (!text) return
-  updateNote({
-  id,
-  content: text,
-  createdAt: new Date().toISOString(),
-  timestamp: Date.now()
-});
+
+    updateNote({
+      id,
+      content: text,
+      createdAt: new Date().toISOString(),
+      timestamp: Date.now(),
+    })
 
     setEditingId(null)
   }

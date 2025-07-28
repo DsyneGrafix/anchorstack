@@ -1,61 +1,39 @@
-import { VaultTile } from "@/components/VaultTile"
+// src/pages/HomePage.tsx
+import React from 'react';
+import { Link } from 'react-router-dom';
+import FocusTimer from '@/components/FocusTimer';
+import QuickNotes from '@/components/QuickNotes';
 
-import HeroSection from "@/components/HeroSection"
-
-
-
-
-
-export default function HomePage() {
+const HomePage: React.FC = () => {
   return (
-    <main className="bg-neutral-50 text-neutral-900">
-      <HeroSection />
+    <div className="max-w-5xl mx-auto py-12 px-4">
+      <h1 className="text-4xl font-bold mb-4 text-[#3B82A7]">Welcome to AnchorStack</h1>
+      <p className="text-lg text-[#7B8D92] mb-10">
+        Your creator operating system for focused work and intentional building.
+      </p>
 
-      <section className="py-16 px-6 md:px-16 bg-white">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-anchor-800">
-          Featured Vault Tools
-        </h2>
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          <VaultTile
-            title="Calm Clarity Kit"
-            tier="free"
-            description="7-day toolkit to restore focus and reset your mind."
-            image="/assets/products/calm-kit.jpg"
-            ctaLink="https://grafixartistry6.gumroad.com/l/nupwf"
-          />
-          <VaultTile
-            title="Momentum Mapping Toolkit"
-             tier="exclusive"
-              description="Plan your week with purpose using our printable focus maps."
-            image="/assets/products/momentum-mapping.jpg"
-            ctaLink="https://grafixartistry6.gumroad.com/l/npruu"
-          />
-          <VaultTile
-            title="Work-Life Integration Mastery"
-            tier="premium"
-            description="Reclaim your time, energy, and attention with biblical clarity."
-            image="/assets/products/work-life.jpg"
-            ctaLink="https://grafixartistry6.gumroad.com/l/lapqw"
-          />
-        </div>
+      <section className="mb-12">
+        <h2 className="text-2xl font-semibold mb-2 text-[#3B82A7]">🕰️ Focus Timer</h2>
+        <FocusTimer />
       </section>
 
-      <section className="py-20 bg-anchor-50 text-center">
-        <h3 className="text-2xl md:text-3xl font-semibold text-anchor-700 mb-4">
-          More than productivity.
-        </h3>
-        <p className="text-lg text-anchor-500 max-w-3xl mx-auto mb-6">
-          AnchorStack isn’t just another app. It’s a system for Spirit-led action.
-          Everything you see here is built to help you stay grounded, focused,
-          and faithful to your creative calling.
+      <section className="mb-12">
+        <h2 className="text-2xl font-semibold mb-2 text-[#3B82A7]">📝 Quick Notes</h2>
+        <QuickNotes />
+      </section>
+
+      <section>
+        <h2 className="text-2xl font-semibold mb-4 text-[#3B82A7]">📦 Product Vault</h2>
+        <p className="text-[#7B8D92] mb-4">
+          Explore powerful tools and templates to help you stay focused and build momentum.
         </p>
-        <a
-          href="/about"
-          className="inline-block bg-warning-500 hover:bg-warning-600 text-white px-6 py-3 rounded-md font-medium transition"
-        >
-          Learn More About AnchorStack
-        </a>
+        <Link to="/vault" className="inline-block bg-[#CA6B6E] text-white px-6 py-3 rounded-xl shadow hover:bg-[#B85052] transition">
+          Enter the Vault
+        </Link>
       </section>
-    </main>
-  )
-}
+    </div>
+  );
+};
+
+export default HomePage;
+
