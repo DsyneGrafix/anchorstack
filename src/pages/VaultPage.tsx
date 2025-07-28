@@ -45,10 +45,17 @@ const VaultPage = () => {
         image="/images/creatorvault.jpg"
         ctaLink="/products/creator-vault"
       />
+
+      <VaultTile
+        title="The Most Important Women of the Bible"
+        tier="premium"
+        description="Explore the faith, courage, and legacy of biblical heroines like Eve, Deborah, Mary Magdalene, and more."
+        image="/images/vault/biblical_women_cover.jpg"
+        ctaLink="/downloads/Vault_Product_Biblical_Women.zip"
+      />
     </div>
   );
 };
 
 export default VaultPage;
-
 

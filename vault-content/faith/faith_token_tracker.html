@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faith Token Daily Tracker</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #1a202c;
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .header::before {
+            content: '⚓';
+            position: absolute;
+            top: 20px;
+            left: 30px;
+            font-size: 24px;
+            opacity: 0.7;
+        }
+        
+        .header h1 {
+            font-family: 'Crimson Text', serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .header p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+        
+        .date-section {
+            padding: 30px;
+            border-bottom: 2px solid #e2e8f0;
+            background: #f8fafc;
+        }
+        
+        .date-input {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .date-input input {
+            padding: 8px 12px;
+            border: 2px solid #cbd5e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: white;
+        }
+        
+        .tokens-grid {
+            padding: 40px 30px;
+            display: grid;
+            gap: 30px;
+        }
+        
+        .token-card {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .token-card:hover {
+            border-color: #4299e1;
+            box-shadow: 0 8px 25px rgba(66, 153, 225, 0.15);
+        }
+        
+        .token-number {
+            position: absolute;
+            top: -15px;
+            left: 25px;
+            background: linear-gradient(135deg, #4299e1, #2b6cb0);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .token-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+            margin-top: 5px;
+        }
+        
+        .token-icon {
+            font-size: 1.5rem;
+        }
+        
+        .token-title {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #2d3748;
+        }
+        
+        .token-verse {
+            font-style: italic;
+            color: #4a5568;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            padding-left: 15px;
+            border-left: 3px solid #e2e8f0;
+        }
+        
+        .token-sections {
+            display: grid;
+            gap: 20px;
+        }
+        
+        .section {
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #4299e1;
+        }
+        
+        .section h4 {
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .section textarea {
+            width: 100%;
+            min-height: 60px;
+            padding: 8px;
+            border: 1px solid #cbd5e0;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            resize: vertical;
+            background: white;
+        }
+        
+        .section textarea:focus {
+            outline: none;
+            border-color: #4299e1;
+            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
+        }
+        
+        .reflection-section {
+            background: linear-gradient(135deg, #f0fff4 0%, #f7fafc 100%);
+            padding: 30px;
+            margin-top: 20px;
+        }
+        
+        .reflection-section h3 {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.6rem;
+            color: #2d3748;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .reflection-section textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 15px;
+            border: 2px solid #c6f6d5;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            background: white;
+        }
+        
+        .footer {
+            background: #2d3748;
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .footer p {
+            opacity: 0.8;
+            font-style: italic;
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .container {
+                box-shadow: none;
+                border-radius: 0;
+            }
+            
+            .token-card {
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .tokens-grid {
+                padding: 20px;
+            }
+            
+            .token-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Faith Token Daily Tracker</h1>
+            <p>Transform your to-do list into a prayer list</p>
+        </div>
+        
+        <div class="date-section">
+            <div class="date-input">
+                <strong>Today's Date:</strong>
+                <input type="date" id="todayDate" />
+            </div>
+        </div>
+        
+        <div class="tokens-grid">
+            <!-- Token 1: Clarity -->
+            <div class="token-card">
+                <div class="token-number">1</div>
+                <div class="token-header">
+                    <span class="token-icon">🧭</span>
+                    <h3 class="token-title">Clarity</h3>
+                </div>
+                <div class="token-verse">
+                    "Trust in the Lord with all your heart and lean not on your own understanding" - Proverbs 3:5
+                </div>
+                <div class="token-sections">
+                    <div class="section">
+                        <h4>Morning Intention</h4>
+                        <textarea placeholder="What is God calling me to focus on today?"></textarea>
+                    </div>
+                    <div class="section">
+                        <h4>Evening Reflection</h4>
+                        <textarea placeholder="How did God provide clarity today?"></textarea>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Token 2: Courage -->
+            <div class="token-card">
+                <div class="token-number">2</div>
+                <div class="token-header">
+                    <span class="token-icon">⚔️</span>
+                    <h3 class="token-title">Courage</h3>
+                </div>
+                <div class="token-verse">
+                    "Be strong and courageous! Do not be afraid or discouraged" - Joshua 1:9
+                </div>
+                <div class="token-sections">
+                    <div class="section">
+                        <h4>Morning Intention</h4>
+                        <textarea placeholder="Where do I need to step into brave obedience today?"></textarea>
+                    </div>
+                    <div class="section">
+                        <h4>Evening Reflection</h4>
+                        <textarea placeholder="How did I experience God's strength in my weakness?"></textarea>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Token 3: Consistency -->
+            <div class="token-card">
+                <div class="token-number">3</div>
+                <div class="token-header">
+                    <span class="token-icon">🔄</span>
+                    <h3 class="token-title">Consistency</h3>
+                </div>
+                <div class="token-verse">
+                    "Whoever is faithful in very little is also faithful in much" - Luke 16:10
+                </div>
+                <div class="token-sections">
+                    <div class="section">
+                        <h4>Morning Intention</h4>
+                        <textarea placeholder="How can I show up faithfully in small things today?"></textarea>
+                    </div>
+                    <div class="section">
+                        <h4>Evening Reflection</h4>
+                        <textarea placeholder="Where did I see God's faithfulness in my consistency?"></textarea>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Token 4: Compassion -->
+            <div class="token-card">
+                <div class="token-number">4</div>
+                <div class="token-header">
+                    <span class="token-icon">❤️</span>
+                    <h3 class="token-title">Compassion</h3>
+                </div>
+                <div class="token-verse">
+                    "Be kind and compassionate to one another" - Ephesians 4:32
+                </div>
+                <div class="token-sections">
+                    <div class="section">
+                        <h4>Morning Intention</h4>
+                        <textarea placeholder="Who am I called to serve through my work today?"></textarea>
+                    </div>
+                    <div class="section">
+                        <h4>Evening Reflection</h4>
+                        <textarea placeholder="How did God love others through me today?"></textarea>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Token 5: Calling -->
+            <div class="token-card">
+                <div class="token-number">5</div>
+                <div class="token-header">
+                    <span class="token-icon">🌟</span>
+                    <h3 class="token-title">Calling</h3>
+                </div>
+                <div class="token-verse">
+                    "For we are God's handiwork, created in Christ Jesus to do good works" - Ephesians 2:10
+                </div>
+                <div class="token-sections">
+                    <div class="section">
+                        <h4>Morning Intention</h4>
+                        <textarea placeholder="How does today's work align with my greater purpose?"></textarea>
+                    </div>
+                    <div class="section">
+                        <h4>Evening Reflection</h4>
+                        <textarea placeholder="Where did I see God's kingdom purposes in my tasks?"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="reflection-section">
+            <h3>Daily Anchor Reflection</h3>
+            <textarea placeholder="How did treating my to-do list as a prayer list change my perspective today? What did I learn about God through my work?"></textarea>
+        </div>
+        
+        <div class="footer">
+            <p>"Every task is a conversation with the Divine. Every checkbox is a chance for communion."</p>
+        </div>
+    </div>
+    
+    <script>
+        // Set today's date automatically
+        document.getElementById('todayDate').valueAsDate = new Date();
+        
+        // Auto-save to localStorage
+        const inputs = document.querySelectorAll('textarea, input');
+        inputs.forEach(input => {
+            const key = `faith-token-${input.placeholder || 'date'}`;
+            
+            // Load saved value
+            const saved = localStorage.getItem(key);
+            if (saved) input.value = saved;
+            
+            // Save on change
+            input.addEventListener('input', () => {
+                localStorage.setItem(key, input.value);
+            });
+        });
+        
+        // Clear data function (for testing)
+        function clearAllData() {
+            if (confirm('Clear all saved data?')) {
+                localStorage.clear();
+                location.reload();
+            }
+        }
+    </script>
+</body>
+</html>

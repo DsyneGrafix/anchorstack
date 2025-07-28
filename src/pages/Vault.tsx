@@ -1,5 +1,13 @@
 import React from 'react';
-import VaultTile from '@/components/VaultTile';
+import { VaultTile } from '@/components/VaultTile';
+
+interface VaultTileProps {
+  title: string;
+  // Add this:
+  tier: 'free' | 'premium' | 'exclusive'; // or whatever values you're using
+}
+
+
 
 const Vault: React.FC = () => {
   return (
