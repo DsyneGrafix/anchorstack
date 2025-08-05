@@ -1,39 +1,53 @@
-import React from 'react'
-import { Header } from '@/components/Header'
-import QuickNotes from '@/components/QuickNotes'
-import { VaultSection } from '@/components/VaultSection'
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-const App: React.FC = () => {
-  return (
-    <div className="min-h-screen bg-[#202020] text-white px-4 py-6">
-      <Header />
+// ✅ Page Components
+import Home from "./pages/Home";
+import Vault from "./components/Vault";
+import Contact from "./pages/Contact";
+import NotFound from "./pages/NotFound";
+import FocusPage from "./pages/FocusPage";
+import FaithToken from "./pages/FaithToken";
+import HomePage from './pages/HomePage'
 
-      <main className="mt-8 max-w-4xl mx-auto space-y-12">
-        <section id="focus">
-          <h2 className="text-2xl font-bold mb-4 text-[#4daaa8]">🎯 Focus Timer</h2>
-          <p className="text-sm text-gray-300 mb-2">Refocus your time with intentional sprints.</p>
-          <div className="border border-[#4daaa8] rounded p-4 bg-[#2a2a2a]">
-            <p className="text-xl">⏱️ 25:00</p>
-            <div className="mt-4 flex gap-4">
-              <button className="bg-[#4daaa8] px-4 py-2 rounded">Start</button>
-              <button className="bg-[#f4cd87] px-4 py-2 rounded">Reset</button>
-            </div>
-          </div>
-        </section>
+<Route path="/" element={<HomePage />} />
 
-        <section id="notes">
-          <h2 className="text-2xl font-bold mb-4 text-[#588bb5]">📝 Quick Notes</h2>
-          <QuickNotes />
-        </section>
+// ✅ Vault Product Pages
+import CreativeConfidenceKit from "./pages/vault/CreativeConfidenceProductPage";
+import MotivationalQuotesPack from "./pages/vault/QuotesPackProductPage";
+import InspirationArsenal from "./pages/vault/InspirationArsenalProductPage";
 
-        <section id="vault">
-          <h2 className="text-2xl font-bold mb-4 text-[#df6f74]">🔓 Product Vault</h2>
-          <VaultSection />
-        </section>
-      </main>
-    </div>
-  )
+function App() {
+  try {
+    return (
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/vault" element={<Vault />} />
+          <Route path="/focus" element={<FocusPage />} />
+          <Route path="/faith-token" element={<FaithToken />} />
+          <Route path="/contact" element={<Contact />} />
+
+          {/* Vault sub-pages */}
+          <Route path="/vault/creative-confidence-kit" element={<CreativeConfidenceKit />} />
+          <Route path="/vault/motivational-quotes-pack" element={<MotivationalQuotesPack />} />
+          <Route path="/vault/inspiration-arsenal" element={<InspirationArsenal />} />
+
+          {/* Fallback */}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Router>
+    );
+  } catch (error) {
+    console.error("❌ App rendering failed:", error);
+    return (
+      <div className="p-4 bg-red-100 text-red-900 rounded-xl mt-10 mx-auto max-w-xl text-center">
+        <h1 className="text-2xl font-bold">Oops! Something went wrong.</h1>
+        <p className="mt-2">Please try refreshing the page or check back later.</p>
+      </div>
+    );
+  }
 }
 
-export default App
+export default App;
 

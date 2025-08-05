@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Pentateuch Vault Bundle – AnchorStack Platinum</title>
+<meta name="description" content="Unlock 5 deep-dive studies on Genesis, Exodus, Leviticus, Numbers, and Deuteronomy. Includes charts, commentaries, and study notes in one powerful ZIP.">
+<meta property="og:title" content="The Pentateuch Vault Bundle – AnchorStack Platinum" />
+<meta property="og:description" content="Your ultimate Torah study pack: 5 foundational books, expert insights, ready-to-use commentaries." />
+<meta property="og:image" content="https://anchorstack.pro/images/pentateuch-preview.jpg" />
+<meta property="og:url" content="https://anchorstack.pro/vault-content/pentateuch.html" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals -->
+    <!-- Application Structure Plan: A thematic, single-page application is designed to make the complex information on the Pentateuch accessible and engaging. The structure avoids a linear text dump by using a sticky top navigation to jump between five core themes: Introduction, Composition, Priesthood, Sacrificial System, and Theological Significance. This modular approach allows users to explore topics of interest non-linearly. Key interactions include tabbed interfaces for comparing the JEDP sources and the priestly roles, and an interactive donut chart for exploring the sacrificial system. This design prioritizes user-driven discovery and comprehension over passive reading, transforming dense academic data into a dynamic educational tool. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: The four JEDP sources. Goal: Compare/Organize. Viz/Presentation: Interactive Tabs. Interaction: Click tab to reveal source characteristics. Justification: Allows direct comparison of the distinct theological and stylistic traits of each source, which is more effective than a static table. Library/Method: HTML/CSS/JS.
+        - Report Info: Roles of High Priest, Priests, Levites. Goal: Compare. Viz/Presentation: Interactive Tabs. Interaction: Click tab to display duties. Justification: Clearly delineates the hierarchical roles and responsibilities in a digestible format. Library/Method: HTML/CSS/JS.
+        - Report Info: Types of sacrifices. Goal: Organize/Inform. Viz/Presentation: Interactive Donut Chart with adjacent details panel. Interaction: Click on a chart segment to update the details panel with that sacrifice's purpose. Justification: Creates an engaging, visual entry point to the data, directly linking the abstract concept (e.g., 'Sin Offering') to its concrete meaning. Library/Method: Chart.js (Canvas).
+        - CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #FBF9F6;
+            color: #3D405B;
+        }
+        .nav-link {
+            transition: color 0.3s, border-bottom-color 0.3s;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #D68C45;
+            border-bottom-color: #D68C45;
+        }
+        .tab.active {
+            background-color: #D68C45;
+            color: #FFFFFF;
+        }
+        .content-card {
+            background-color: #FFFFFF;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: box-shadow 0.3s ease-in-out;
+        }
+        .content-card:hover {
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 400px;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white/90 backdrop-blur-lg shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-xl md:text-2xl font-bold text-[#D68C45]">The Pentateuch</h1>
+            <div class="hidden md:flex space-x-8">
+                <a href="#introduction" class="nav-link pb-1 border-b-2 border-transparent">Introduction</a>
+                <a href="#composition" class="nav-link pb-1 border-b-2 border-transparent">Composition</a>
+                <a href="#priesthood" class="nav-link pb-1 border-b-2 border-transparent">Priesthood</a>
+                <a href="#sacrifices" class="nav-link pb-1 border-b-2 border-transparent">Sacrifices</a>
+                <a href="#theology" class="nav-link pb-1 border-b-2 border-transparent">Theology</a>
+            </div>
+            <div class="md:hidden">
+                <select id="mobile-nav" class="bg-white border border-gray-300 rounded-md py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#D68C45]">
+                    <option value="#introduction">Introduction</option>
+                    <option value="#composition">Composition</option>
+                    <option value="#priesthood">Priesthood</option>
+                    <option value="#sacrifices">Sacrifices</option>
+                    <option value="#theology">Theology</option>
+                </select>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+
+        <section id="introduction" class="scroll-mt-24 text-center">
+            <h2 class="text-4xl font-bold mb-4">An Interactive Study of the Five Books</h2>
+            <p class="max-w-3xl mx-auto text-lg text-gray-600 mb-12">
+                The Pentateuch, or Torah, comprises the first five books of the Bible: Genesis, Exodus, Leviticus, Numbers, and Deuteronomy. It forms the foundation of Jewish and Christian faith, weaving together narratives of creation, law, and covenant. This interactive guide explores its complex composition, the pivotal role of the Levitical priesthood, and its enduring theological significance.
+            </p>
+        </section>
+
+        <hr class="my-16 border-gray-200">
+
+        <section id="composition" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-center mb-4">Composition & Authorship</h2>
+            <p class="max-w-3xl mx-auto text-center text-lg text-gray-600 mb-12">
+                While traditionally attributed to Moses, modern scholarship suggests the Pentateuch is a composite work woven from multiple sources over centuries. The Documentary Hypothesis is the most influential model, proposing four main literary strands: J, E, D, and P. Click the tabs to explore the distinct characteristics of each source.
+            </p>
+
+            <div class="flex justify-center mb-8">
+                <div id="source-tabs" class="flex flex-wrap justify-center gap-2 bg-gray-100 p-2 rounded-full">
+                    <button class="tab px-5 py-2 rounded-full text-sm font-semibold" data-source="j">Yahwist (J)</button>
+                    <button class="tab px-5 py-2 rounded-full text-sm font-semibold" data-source="e">Elohist (E)</button>
+                    <button class="tab px-5 py-2 rounded-full text-sm font-semibold" data-source="d">Deuteronomist (D)</button>
+                    <button class="tab px-5 py-2 rounded-full text-sm font-semibold" data-source="p">Priestly (P)</button>
+                </div>
+            </div>
+
+            <div id="source-content" class="content-card p-8 min-h-[300px] max-w-4xl mx-auto transition-opacity duration-300">
+            </div>
+        </section>
+
+        <hr class="my-16 border-gray-200">
+
+        <section id="priesthood" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-center mb-4">The Levitical Priesthood</h2>
+            <p class="max-w-3xl mx-auto text-center text-lg text-gray-600 mb-12">
+                The Levitical Priesthood was the central religious authority in ancient Israel, a divinely appointed class responsible for mediation and worship. The system had a clear hierarchy with distinct roles. Explore the duties of each group below.
+            </p>
+
+            <div class="flex justify-center mb-8">
+                <div id="priesthood-tabs" class="flex flex-wrap justify-center gap-2 bg-gray-100 p-2 rounded-full">
+                    <button class="tab px-5 py-2 rounded-full text-sm font-semibold" data-role="high-priest">High Priest</button>
+                    <button class="tab px-5 py-2 rounded-full text-sm font-semibold" data-role="priests">Priests (Kohanim)</button>
+                    <button class="tab px-5 py-2 rounded-full text-sm font-semibold" data-role="levites">Levites</button>
+                </div>
+            </div>
+
+            <div id="priesthood-content" class="content-card p-8 min-h-[300px] max-w-4xl mx-auto transition-opacity duration-300">
+            </div>
+        </section>
+
+        <hr class="my-16 border-gray-200">
+
+        <section id="sacrifices" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-center mb-4">The Sacrificial System</h2>
+            <p class="max-w-3xl mx-auto text-center text-lg text-gray-600 mb-12">
+                Sacrifice was the primary means of worship and atonement in the Pentateuch. The system, detailed in Leviticus, was complex, with different offerings for specific purposes. Click on a segment of the chart to learn about each major type of sacrifice.
+            </p>
+
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="chart-container">
+                    <canvas id="sacrifices-chart"></canvas>
+                </div>
+                <div>
+                    <div id="sacrifice-details" class="content-card p-8 min-h-[350px]">
+                        <h3 class="text-2xl font-bold text-[#D68C45] mb-4">Explore the Sacrifices</h3>
+                        <p class="text-gray-600">Select a section of the chart to reveal its theological purpose and key characteristics. This interactive tool helps visualize the core components of Israel's worship system.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="my-16 border-gray-200">
+
+        <section id="theology" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-center mb-4">Theological Significance</h2>
+            <p class="max-w-3xl mx-auto text-center text-lg text-gray-600 mb-12">
+                The Pentateuch's influence extends far beyond its historical context, providing a theological foundation for both Judaism and Christianity. Its concepts of law, priesthood, and covenant are interpreted and applied in distinct ways within each tradition.
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="content-card p-8">
+                    <h3 class="text-2xl font-bold mb-4 text-[#D68C45]">In Jewish Tradition</h3>
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        The Torah is the bedrock of **Halakha** (Jewish Law), a living body of law guiding daily life. Its interpretation varies across movements, from Orthodox adherence to immutable divine law to Reform's emphasis on ethical monotheism. Central to Jewish life is **Torah study**, considered a paramount commandment that replaced sacrifice as the primary act of worship after the Temple's destruction.
+                    </p>
+                </div>
+                <div class="content-card p-8">
+                    <h3 class="text-2xl font-bold mb-4 text-[#D68C45]">In Christian Theology</h3>
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        The Levitical priesthood and its sacrifices are seen as a temporary system **fulfilled and superseded by Jesus Christ**. As the "Great High Priest" in the order of Melchizedek, his once-for-all sacrifice provides ultimate atonement. This establishes the **"priesthood of all believers,"** granting every Christian direct access to God without the need for a human intermediary.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-100 mt-16">
+        <div class="container mx-auto px-6 py-8 text-center text-gray-500">
+            <p>An Interactive Study of the Pentateuch.</p>
+            <p class="text-sm mt-2">Content synthesized from scholarly reports. Application designed for educational exploration.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            const sourceData = {
+                'j': {
+                    title: 'The Yahwist (J) Source',
+                    content: `
+                        <p class="text-gray-700 leading-relaxed mb-4">Considered the earliest source (c. 10th-9th century BCE), J is characterized by its use of the divine name <strong>Yahweh (YHWH)</strong> from the beginning. It presents God in vivid, anthropomorphic terms—walking, talking, and interacting directly with humanity. Its narratives often focus on the southern kingdom of Judah and provide theological support for the Davidic monarchy.</p>
+                        <ul class="list-disc list-inside text-gray-700 space-y-2">
+                            <li><strong>Divine Name:</strong> Yahweh</li>
+                            <li><strong>View of God:</strong> Anthropomorphic, personal</li>
+                            <li><strong>Key Themes:</strong> Human-soil relationship, progressive corruption, covenant with Abraham.</li>
+                            <li><strong>Examples:</strong> Genesis 2-3 (Second Creation/Fall), Genesis 12 (Abraham's Call).</li>
+                        </ul>
+                    `
+                },
+                'e': {
+                    title: 'The Elohist (E) Source',
+                    content: `
+                        <p class="text-gray-700 leading-relaxed mb-4">Dated slightly later than J (c. 9th-8th century BCE), the E source uses the more generic term <strong>Elohim</strong> for God until His name is revealed to Moses. God is portrayed as more remote and transcendent, communicating indirectly through dreams, messengers, or angels. This source is believed to have originated in the northern kingdom of Israel.</p>
+                        <ul class="list-disc list-inside text-gray-700 space-y-2">
+                            <li><strong>Divine Name:</strong> Elohim (pre-revelation)</li>
+                            <li><strong>View of God:</strong> Transcendent, remote</li>
+                            <li><strong>Key Themes:</strong> Fear of God, prophets and prophecy (e.g., Abraham as a prophet).</li>
+                            <li><strong>Examples:</strong> Genesis 20 (Abraham and Abimelech), parts of the Joseph story.</li>
+                        </ul>
+                    `
+                },
+                'd': {
+                    title: 'The Deuteronomist (D) Source',
+                    content: `
+                        <p class="text-gray-700 leading-relaxed mb-4">Largely confined to the book of Deuteronomy, the D source (c. 7th century BCE) is defined by its powerful, sermonic style. Its core demand is absolute loyalty to Yahweh and the <strong>centralization of worship</strong> in a single, chosen place (Jerusalem). It presents a clear theology of covenant: obedience brings blessings, while disobedience brings curses and national disaster. It is often linked to King Josiah's reforms.</p>
+                        <ul class="list-disc list-inside text-gray-700 space-y-2">
+                            <li><strong>Divine Name:</strong> Yahweh</li>
+                            <li><strong>View of God:</strong> Demands exclusive loyalty</li>
+                            <li><strong>Key Themes:</strong> Covenant fidelity, one God, one sanctuary, one law.</li>
+                            <li><strong>Examples:</strong> The entire book of Deuteronomy.</li>
+                        </ul>
+                    `
+                },
+                'p': {
+                    title: 'The Priestly (P) Source',
+                    content: `
+                        <p class="text-gray-700 leading-relaxed mb-4">Considered the latest source (c. 6th-5th century BCE), P is characterized by its formal, structured style and its focus on priestly matters. It emphasizes genealogies, ritual law, purity, and the proper order of worship. P portrays a majestic, transcendent God who creates and commands with sovereign power. This source is seen as providing the final editorial framework for the Pentateuch.</p>
+                        <ul class="list-disc list-inside text-gray-700 space-y-2">
+                            <li><strong>Divine Name:</strong> Elohim, then El Shaddai, then Yahweh</li>
+                            <li><strong>View of God:</strong> Majestic, orderly, transcendent</li>
+                            <li><strong>Key Themes:</strong> Holiness, covenants, genealogies, the Sabbath, ritual purity.</li>
+                            <li><strong>Examples:</strong> Genesis 1 (First Creation), the book of Leviticus, instructions for the Tabernacle.</li>
+                        </ul>
+                    `
+                }
+            };
+
+            const priesthoodData = {
+                'high-priest': {
+                    title: 'The High Priest',
+                    content: `
+                        <p class="text-gray-700 leading-relaxed mb-4">The apex of the priesthood, this role was held by a single Aaronic descendant. He was the ultimate spiritual leader and mediator for the nation.</p>
+                        <ul class="list-disc list-inside text-gray-700 space-y-2">
+                            <li><strong>Unique Duty:</strong> Entered the Most Holy Place once a year on the Day of Atonement (Yom Kippur) to atone for the sins of the entire nation.</li>
+                            <li><strong>Responsibilities:</strong> Oversaw all Temple functions and the work of other priests.</li>
+                            <li><strong>Requirements:</strong> Held to the absolute strictest purity laws, including prohibitions against contact with the dead and specific marriage rules.</li>
+                        </ul>
+                    `
+                },
+                'priests': {
+                    title: 'Priests (Kohanim)',
+                    content: `
+                        <p class="text-gray-700 leading-relaxed mb-4">As direct descendants of Aaron, priests were the primary officiants of the sacrificial system, serving as mediators between God and the people.</p>
+                        <ul class="list-disc list-inside text-gray-700 space-y-2">
+                            <li><strong>Primary Role:</strong> Performed the daily sacrifices and rituals at the altar.</li>
+                            <li><strong>Other Duties:</strong> Taught the Law, served as judges in religious matters, maintained the sanctuary (e.g., lighting the menorah), and pronounced the priestly blessing upon the people.</li>
+                            <li><strong>Requirements:</strong> Had to be free of physical defects and adhere to strict purity laws.</li>
+                        </ul>
+                    `
+                },
+                'levites': {
+                    title: 'Levites',
+                    content: `
+                        <p class="text-gray-700 leading-relaxed mb-4">Members of the tribe of Levi not from Aaron's line, they served as assistants to the priests and guardians of the sacred spaces.</p>
+                        <ul class="list-disc list-inside text-gray-700 space-y-2">
+                            <li><strong>Support Role:</strong> Assisted priests in preparing sacrifices, guarded the Tabernacle/Temple, and were responsible for its transport during the wilderness period.</li>
+                            <li><strong>Evolved Duties:</strong> In the Temple period, their roles expanded to include serving as musicians, singers, scribes, and gatekeepers.</li>
+                            <li><strong>Inheritance:</strong> Received no tribal land; instead, God was their inheritance, and they were supported by the tithes of the other tribes.</li>
+                        </ul>
+                    `
+                }
+            };
+            
+            const sacrificesData = [
+                { label: 'Burnt Offering', purpose: 'Represents complete devotion and general atonement for sin. The entire animal was consumed on the altar, its smoke ascending to God as a "pleasing aroma."' },
+                { label: 'Grain Offering', purpose: 'A bloodless offering of thanksgiving and dedication, typically made of flour, oil, and frankincense. It often accompanied burnt offerings.' },
+                { label: 'Sin Offering', purpose: 'Provided atonement for unintentional sins and purification from ritual impurity. The type of animal depended on the offerer\'s social status.' },
+                { label: 'Guilt Offering', purpose: 'Atoned for sins requiring restitution (e.g., fraud or misuse of sacred items). It required repayment to the victim plus a 20% penalty, emphasizing ethical responsibility.' },
+                { label: 'Peace Offering', purpose: 'Celebrated fellowship with God. Portions were shared between the altar, the priest, and the worshiper in a communal meal, symbolizing communion.' }
+            ];
+
+            function setupTabs(tabContainerId, contentContainerId, dataObject, initialKey) {
+                const tabsContainer = document.getElementById(tabContainerId);
+                const contentContainer = document.getElementById(contentContainerId);
+                
+                function updateContent(key) {
+                    const data = dataObject[key];
+                    contentContainer.style.opacity = 0;
+                    setTimeout(() => {
+                        contentContainer.innerHTML = `
+                            <h3 class="text-2xl font-bold text-[#D68C45] mb-4">${data.title}</h3>
+                            ${data.content}
+                        `;
+                        contentContainer.style.opacity = 1;
+                    }, 150);
+                    
+                    tabsContainer.querySelectorAll('.tab').forEach(t => {
+                        t.classList.toggle('active', t.dataset.source === key || t.dataset.role === key);
+                    });
+                }
+
+                tabsContainer.addEventListener('click', (e) => {
+                    if (e.target.classList.contains('tab')) {
+                        const key = e.target.dataset.source || e.target.dataset.role;
+                        updateContent(key);
+                    }
+                });
+                
+                updateContent(initialKey);
+            }
+
+            setupTabs('source-tabs', 'source-content', sourceData, 'j');
+            setupTabs('priesthood-tabs', 'priesthood-content', priesthoodData, 'high-priest');
+
+            const sacrificesCtx = document.getElementById('sacrifices-chart').getContext('2d');
+            const sacrificeDetailsContainer = document.getElementById('sacrifice-details');
+            
+            const sacrificesChart = new Chart(sacrificesCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: sacrificesData.map(s => s.label),
+                    datasets: [{
+                        label: 'Types of Sacrifices',
+                        data: [1, 1, 1, 1, 1], // Equal segments for clickability
+                        backgroundColor: ['#D68C45', '#E5A46C', '#F0B98D', '#F8D1B1', '#FDFBF7'],
+                        borderColor: '#FBF9F6',
+                        borderWidth: 5,
+                        hoverBorderColor: '#3D405B',
+                        hoverOffset: 15
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            enabled: true,
+                            backgroundColor: '#3D405B',
+                            titleFont: { size: 16, weight: 'bold' },
+                            bodyFont: { size: 14 },
+                            padding: 12,
+                            cornerRadius: 8
+                        }
+                    },
+                    cutout: '60%',
+                    onClick: (event, elements) => {
+                        if (elements.length > 0) {
+                            const index = elements[0].index;
+                            const data = sacrificesData[index];
+                            sacrificeDetailsContainer.style.opacity = 0;
+                            setTimeout(() => {
+                                sacrificeDetailsContainer.innerHTML = `
+                                    <h3 class="text-2xl font-bold text-[#D68C45] mb-4">${data.label}</h3>
+                                    <p class="text-gray-600 leading-relaxed">${data.purpose}</p>
+                                `;
+                                sacrificeDetailsContainer.style.opacity = 1;
+                            }, 150);
+                        }
+                    }
+                }
+            });
+
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('section');
+            
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (pageYOffset >= sectionTop - 120) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').substring(1) === current) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+
+            const mobileNav = document.getElementById('mobile-nav');
+            mobileNav.addEventListener('change', (e) => {
+                const section = document.querySelector(e.target.value);
+                if(section) {
+                    section.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+<footer style="text-align: center; font-size: 0.85rem; color: #3333; margin-top: 2rem;"> © Copyright AnchorStack.pro 2025 — All rights reserved. <br>Part of the CreatorOS Wisdom Vault Initiative. </footer>
+</body>
+</html>
+

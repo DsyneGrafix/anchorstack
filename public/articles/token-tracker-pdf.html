@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sacred Strategy Token Tracker</title>
+    <style>
+        @page {
+            size: 8.5in 11in;
+            margin: 0.5in;
+        }
+        
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            max-width: 100%;
+            margin: 0;
+            padding: 20px;
+            background: white;
+        }
+        
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #3498db;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 14px;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        
+        .scripture {
+            background: #ecf0f1;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+            font-style: italic;
+            text-align: center;
+        }
+        
+        .token-section {
+            margin: 25px 0;
+            page-break-inside: avoid;
+        }
+        
+        .token-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .token-icon {
+            font-size: 24px;
+            margin-right: 12px;
+            width: 30px;
+        }
+        
+        .token-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .token-verse {
+            font-size: 12px;
+            color: #7f8c8d;
+            font-style: italic;
+            margin-left: 42px;
+        }
+        
+        .tracker-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+            margin: 15px 0;
+            margin-left: 42px;
+        }
+        
+        .day-box {
+            width: 30px;
+            height: 30px;
+            border: 2px solid #bdc3c7;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .week-label {
+            grid-column: 1 / -1;
+            font-size: 11px;
+            color: #7f8c8d;
+            text-align: center;
+            margin: 10px 0 5px 0;
+        }
+        
+        .reflection-section {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .reflection-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        .reflection-lines {
+            border-bottom: 1px solid #bdc3c7;
+            height: 20px;
+            margin: 8px 0;
+        }
+        
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 12px;
+            color: #7f8c8d;
+            border-top: 1px solid #ecf0f1;
+            padding-top: 20px;
+        }
+        
+        .clarity { --token-color: #3498db; }
+        .courage { --token-color: #e74c3c; }
+        .consistency { --token-color: #2ecc71; }
+        .compassion { --token-color: #f39c12; }
+        .calling { --token-color: #9b59b6; }
+        
+        .token-section[data-token="clarity"] .token-header { border-left: 4px solid #3498db; }
+        .token-section[data-token="courage"] .token-header { border-left: 4px solid #e74c3c; }
+        .token-section[data-token="consistency"] .token-header { border-left: 4px solid #2ecc71; }
+        .token-section[data-token="compassion"] .token-header { border-left: 4px solid #f39c12; }
+        .token-section[data-token="calling"] .token-header { border-left: 4px solid #9b59b6; }
+        
+        @media print {
+            body { margin: 0; padding: 15px; }
+            .token-section { page-break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">⚓ ANCHORSTACK</div>
+        <h1 style="margin: 10px 0; font-size: 28px; color: #2c3e50;">Sacred Strategy Token Tracker</h1>
+        <div class="subtitle">Transform your to-do list into a prayer list</div>
+    </div>
+    
+    <div class="scripture">
+        "Whatever you do, work at it with all your heart, as working for the Lord, not for human masters."<br>
+        <strong>— Colossians 3:23</strong>
+    </div>
+    
+    <div style="margin: 25px 0; padding: 15px; background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 8px;">
+        <h3 style="margin-top: 0; color: #856404;">How to Use This Tracker</h3>
+        <p style="margin-bottom: 0; font-size: 14px;">Each day, as you complete tasks with sacred intention, mark the corresponding token. Aim to collect at least one token daily, building toward a complete set of all five tokens each week. This isn't about perfection—it's about faithfulness in small things.</p>
+    </div>
+
+    <div class="token-section" data-token="clarity">
+        <div class="token-header">
+            <div class="token-icon">🧭</div>
+            <div>
+                <div class="token-title">Clarity Token - "Lord, show me the way"</div>
+                <div class="token-verse">Trust in the Lord with all your heart - Proverbs 3:5</div>
+            </div>
+        </div>
+        <div class="tracker-grid">
+            <div class="week-label">Week 1</div>
+            <div class="day-box">1</div><div class="day-box">2</div><div class="day-box">3</div><div class="day-box">4</div><div class="day-box">5</div><div class="day-box">6</div><div class="day-box">7</div>
+            <div class="week-label">Week 2</div>
+            <div class="day-box">8</div><div class="day-box">9</div><div class="day-box">10</div><div class="day-box">11</div><div class="day-box">12</div><div class="day-box">13</div><div class="day-box">14</div>
+            <div class="week-label">Week 3</div>
+            <div class="day-box">15</div><div class="day-box">16</div><div class="day-box">17</div><div class="day-box">18</div><div class="day-box">19</div><div class="day-box">20</div><div class="day-box">21</div>
+            <div class="week-label">Week 4</div>
+            <div class="day-box">22</div><div class="day-box">23</div><div class="day-box">24</div><div class="day-box">25</div><div class="day-box">26</div><div class="day-box">27</div><div class="day-box">28</div>
+        </div>
+    </div>
+
+    <div class="token-section" data-token="courage">
+        <div class="token-header">
+            <div class="token-icon">⚔️</div>
+            <div>
+                <div class="token-title">Courage Token - "I can do all things"</div>
+                <div class="token-verse">Be strong and courageous - Joshua 1:9</div>
+            </div>
+        </div>
+        <div class="tracker-grid">
+            <div class="week-label">Week 1</div>
+            <div class="day-box">1</div><div class="day-box">2</div><div class="day-box">3</div><div class="day-box">4</div><div class="day-box">5</div><div class="day-box">6</div><div class="day-box">7</div>
+            <div class="week-label">Week 2</div>
+            <div class="day-box">8</div><div class="day-box">9</div><div class="day-box">10</div><div class="day-box">11</div><div class="day-box">12</div><div class="day-box">13</div><div class="day-box">14</div>
+            <div class="week-label">Week 3</div>
+            <div class="day-box">15</div><div class="day-box">16</div><div class="day-box">17</div><div class="day-box">18</div><div class="day-box">19</div><div class="day-box">20</div><div class="day-box">21</div>
+            <div class="week-label">Week 4</div>
+            <div class="day-box">22</div><div class="day-box">23</div><div class="day-box">24</div><div class="day-box">25</div><div class="day-box">26</div><div class="day-box">27</div><div class="day-box">28</div>
+        </div>
+    </div>
+
+    <div class="token-section" data-token="consistency">
+        <div class="token-header">
+            <div class="token-icon">🔄</div>
+            <div>
+                <div class="token-title">Consistency Token - "Faithful in little things"</div>
+                <div class="token-verse">Faithful in very little is faithful in much - Luke 16:10</div>
+            </div>
+        </div>
+        <div class="tracker-grid">
+            <div class="week-label">Week 1</div>
+            <div class="day-box">1</div><div class="day-box">2</div><div class="day-box">3</div><div class="day-box">4</div><div class="day-box">5</div><div class="day-box">6</div><div class="day-box">7</div>
+            <div class="week-label">Week 2</div>
+            <div class="day-box">8</div><div class="day-box">9</div><div class="day-box">10</div><div class="day-box">11</div><div class="day-box">12</div><div class="day-box">13</div><div class="day-box">14</div>
+            <div class="week-label">Week 3</div>
+            <div class="day-box">15</div><div class="day-box">16</div><div class="day-box">17</div><div class="day-box">18</div><div class="day-box">19</div><div class="day-box">20</div><div class="day-box">21</div>
+            <div class="week-label">Week 4</div>
+            <div class="day-box">22</div><div class="day-box">23</div><div class="day-box">24</div><div class="day-box">25</div><div class="day-box">26</div><div class="day-box">27</div><div class="day-box">28</div>
+        </div>
+    </div>
+
+    <div class="token-section" data-token="compassion">
+        <div class="token-header">
+            <div class="token-icon">❤️</div>
+            <div>
+                <div class="token-title">Compassion Token - "Love through action"</div>
+                <div class="token-verse">Be kind and compassionate - Ephesians 4:32</div>
+            </div>
+        </div>
+        <div class="tracker-grid">
+            <div class="week-label">Week 1</div>
+            <div class="day-box">1</div><div class="day-box">2</div><div class="day-box">3</div><div class="day-box">4</div><div class="day-box">5</div><div class="day-box">6</div><div class="day-box">7</div>
+            <div class="week-label">Week 2</div>
+            <div class="day-box">8</div><div class="day-box">9</div><div class="day-box">10</div><div class="day-box">11</div><div class="day-box">12</div><div class="day-box">13</div><div class="day-box">14</div>
+            <div class="week-label">Week 3</div>
+            <div class="day-box">15</div><div class="day-box">16</div><div class="day-box">17</div><div class="day-box">18</div><div class="day-box">19</div><div class="day-box">20</div><div class="day-box">21</div>
+            <div class="week-label">Week 4</div>
+            <div class="day-box">22</div><div class="day-box">23</div><div class="day-box">24</div><div class="day-box">25</div><div class="day-box">26</div><div class="day-box">27</div><div class="day-box">28</div>
+        </div>
+    </div>
+
+    <div class="token-section" data-token="calling">
+        <div class="token-header">
+            <div class="token-icon">🌟</div>
+            <div>
+                <div class="token-title">Calling Token - "This is worship"</div>
+                <div class="token-verse">Created for good works - Ephesians 2:10</div>
+            </div>
+        </div>
+        <div class="tracker-grid">
+            <div class="week-label">Week 1</div>
+            <div class="day-box">1</div><div class="day-box">2</div><div class="day-box">3</div><div class="day-box">4</div><div class="day-box">5</div><div class="day-box">6</div><div class="day-box">7</div>
+            <div class="week-label">Week 2</div>
+            <div class="day-box">8</div><div class="day-box">9</div><div class="day-box">10</div><div class="day-box">11</div><div class="day-box">12</div><div class="day-box">13</div><div class="day-box">14</div>
+            <div class="week-label">Week 3</div>
+            <div class="day-box">15</div><div class="day-box">16</div><div class="day-box">17</div><div class="day-box">18</div><div class="day-box">19</div><div class="day-box">20</div><div class="day-box">21</div>
+            <div class="week-label">Week 4</div>
+            <div class="day-box">22</div><div class="day-box">23</div><div class="day-box">24</div><div class="day-box">25</div><div class="day-box">26</div><div class="day-box">27</div><div class="day-box">28</div>
+        </div>
+    </div>
+
+    <div class="reflection-section">
+        <div class="reflection-title">📝 Weekly Reflection Questions</div>
+        <p style="margin: 10px 0; font-weight: bold;">Which token came most naturally this week?</p>
+        <div class="reflection-lines"></div>
+        <div class="reflection-lines"></div>
+        
+        <p style="margin: 10px 0; font-weight: bold;">How did viewing your tasks as sacred opportunities change your approach?</p>
+        <div class="reflection-lines"></div>
+        <div class="reflection-lines"></div>
+        
+        <p style="margin: 10px 0; font-weight: bold;">What specific moment this week felt most like worship through work?</p>
+        <div class="reflection-lines"></div>
+        <div class="reflection-lines"></div>
+        
+        <p style="margin: 10px 0; font-weight: bold;">Prayer for next week:</p>
+        <div class="reflection-lines"></div>
+        <div class="reflection-lines"></div>
+        <div class="reflection-lines"></div>
+    </div>
+
+    <div class="footer">
+        <strong>AnchorStack Sacred Strategy</strong><br>
+        Download more resources at <strong>anchorstack.pro</strong><br>
+        <em>"Every task is an opportunity to practice faithfulness"</em>
+    </div>
+</body>
+</html>

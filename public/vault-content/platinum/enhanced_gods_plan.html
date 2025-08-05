@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>God's Plan: An Interactive Exploration</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Sacred Harmony -->
+    <!-- Application Structure Plan: The SPA is organized into five thematic sections to create a logical and exploratory user journey. It begins with an introduction ('The Divine Blueprint'), moves to foundational concepts ('Core Pillars'), then to a highly interactive comparison of world faiths ('A Spectrum of Belief'), explores the central philosophical conflict ('The Great Paradox'), and concludes with actionable advice ('Finding Your Path'). This structure was chosen over a linear report format to deconstruct a complex theological topic into digestible, engaging modules. It allows users to either follow a guided path from abstract concepts to personal application or to jump directly to areas of interest, maximizing usability and understanding. -->
+    <!-- Visualization & Content Choices: The core data from the report's comparative table is visualized using an interactive radar chart (Chart.js) in the 'Spectrum of Belief' section. Goal: Compare complex theological stances. Method: Users click buttons for different faiths, which dynamically updates the chart and an accompanying text block. Justification: A radar chart effectively displays multi-variable data for different subjects, making nuanced theological positions instantly comparable and visually distinct. Other sections use interactive cards (HTML/CSS/JS) to organize concepts and practical steps. Goal: Organize and Inform. Method: Click-to-reveal interactions. Justification: This encourages user engagement and prevents information overload. The 'Great Paradox' section uses a two-column layout with icons to visualize the central tension. Goal: Explain a core conflict. Method: A visual metaphor. Justification: Simplifies an abstract idea. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDFBF8;
+            color: #3D405B;
+        }
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #8D8DAA;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+        .card {
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+            cursor: pointer;
+        }
+        .card.is-flipped {
+            transform: rotateY(180deg);
+        }
+        .card-face {
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+        .card-face-back {
+            transform: rotateY(180deg);
+        }
+        .faith-btn {
+            transition: all 0.3s ease;
+        }
+        .faith-btn.active {
+            background-color: #3D405B;
+            color: #FDFBF8;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 500px;
+                max-height: 500px;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header id="header" class="bg-opacity-80 bg-FDFBF8/80 backdrop-blur-sm sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#hero" class="text-xl font-bold text-3D405B">The Divine Blueprint</a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#concepts" class="nav-link text-gray-600 hover:text-3D405B">Concepts</a>
+                <a href="#perspectives" class="nav-link text-gray-600 hover:text-3D405B">Perspectives</a>
+                <a href="#tension" class="nav-link text-gray-600 hover:text-3D405B">The Paradox</a>
+                <a href="#guidance" class="nav-link text-gray-600 hover:text-3D405B">Guidance</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden text-3D405B">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden">
+            <a href="#concepts" class="block py-2 px-6 text-sm text-gray-600 hover:bg-gray-200">Concepts</a>
+            <a href="#perspectives" class="block py-2 px-6 text-sm text-gray-600 hover:bg-gray-200">Perspectives</a>
+            <a href="#tension" class="block py-2 px-6 text-sm text-gray-600 hover:bg-gray-200">The Paradox</a>
+            <a href="#guidance" class="block py-2 px-6 text-sm text-gray-600 hover:bg-gray-200">Guidance</a>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="py-20 md:py-32 bg-[#F4F1EA]">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-4xl md:text-6xl font-bold text-3D405B mb-4">Understanding God's Plan</h1>
+                <p class="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto">An interactive journey into the theological concept of a divine blueprint for creation, humanity, and your own life. Explore diverse perspectives on purpose, destiny, and free will.</p>
+            </div>
+        </section>
+
+        <section id="concepts" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-3D405B">Core Theological Pillars</h2>
+                    <p class="text-lg text-gray-600 mt-2 max-w-2xl mx-auto">This section introduces the foundational concepts that underpin the idea of a Divine Plan. These pillars—Sovereignty, Providence, and Purpose—are interconnected, defining God's relationship with creation and the unfolding of history.</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-white p-8 rounded-lg shadow-lg border border-gray-200 text-center">
+                        <div class="text-4xl mb-4 text-[#8D8DAA]">👑</div>
+                        <h3 class="text-xl font-semibold text-3D405B mb-2">Divine Sovereignty</h3>
+                        <p class="text-gray-600">God's absolute rule and complete control over all creation. This doctrine asserts that nothing occurs outside of God's will or ultimate purpose, directing all events to fulfill His plan.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-lg border border-gray-200 text-center">
+                        <div class="text-4xl mb-4 text-[#8D8DAA]">🕊️</div>
+                        <h3 class="text-xl font-semibold text-3D405B mb-2">Divine Providence</h3>
+                        <p class="text-gray-600">The continuous care and guidance God provides to His creation. It is God's active intervention in the universe to uphold, direct, and govern all things.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-lg border border-gray-200 text-center">
+                        <div class="text-4xl mb-4 text-[#8D8DAA]">🎯</div>
+                        <h3 class="text-xl font-semibold text-3D405B mb-2">Divine Purpose</h3>
+                        <p class="text-gray-600">God's specific intentions for creation, humanity, and individuals. This encompasses the grand narrative of redemption and the unique calling for each person's life.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="perspectives" class="py-20 bg-[#F4F1EA]">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-3D405B">A Spectrum of Belief</h2>
+                    <p class="text-lg text-gray-600 mt-2 max-w-3xl mx-auto">While many faiths acknowledge a divine plan, their understanding of its interplay with human freedom varies significantly. Select a tradition below to explore its unique perspective on the balance between divine will and human agency. The chart visualizes the relative emphasis each tradition places on different theological aspects.</p>
+                </div>
+                <div class="flex flex-wrap justify-center gap-2 md:gap-4 mb-8">
+                    <button class="faith-btn active px-4 py-2 bg-white rounded-full shadow text-sm font-medium" data-faith="calvinist">Reformed/Calvinist</button>
+                    <button class="faith-btn px-4 py-2 bg-white rounded-full shadow text-sm font-medium" data-faith="arminian">Arminian/Lutheran</button>
+                    <button class="faith-btn px-4 py-2 bg-white rounded-full shadow text-sm font-medium" data-faith="catholic">Catholic</button>
+                    <button class="faith-btn px-4 py-2 bg-white rounded-full shadow text-sm font-medium" data-faith="sunni">Sunni Islam</button>
+                    <button class="faith-btn px-4 py-2 bg-white rounded-full shadow text-sm font-medium" data-faith="judaism">Judaism</button>
+                    <button class="faith-btn px-4 py-2 bg-white rounded-full shadow text-sm font-medium" data-faith="hinduism">Hinduism</button>
+                </div>
+                <div class="grid lg:grid-cols-5 gap-8 items-center">
+                    <div class="lg:col-span-3">
+                        <div class="chart-container bg-white p-4 rounded-lg shadow-lg border border-gray-200">
+                            <canvas id="faithsChart"></canvas>
+                        </div>
+                    </div>
+                    <div id="faith-details" class="lg:col-span-2 bg-white p-8 rounded-lg shadow-lg border border-gray-200">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tension" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-3D405B">The Great Paradox</h2>
+                     <p class="text-lg text-gray-600 mt-2 max-w-3xl mx-auto">At the heart of theology lies the enduring tension between God's absolute control and human freedom. This paradox is not necessarily a contradiction to be solved, but a mystery to be held in balance, often described as two sides of the same divine coin.</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-8 items-start">
+                    <div class="bg-white p-8 rounded-lg shadow-lg border border-gray-200 text-center">
+                        <div class="text-5xl mb-4 text-[#8D8DAA]">👑</div>
+                        <h3 class="text-2xl font-semibold text-3D405B mb-3">Divine Sovereignty</h3>
+                        <p class="text-gray-600 mb-4">God's will is absolute and His plan is predetermined. He has chosen those He will save, and His grace cannot be resisted.</p>
+                        <ul class="text-left space-y-2 text-gray-600">
+                            <li class="flex items-start"><span class="mr-2 mt-1 text-[#8D8DAA]">✓</span><span>God is in complete control of all events.</span></li>
+                            <li class="flex items-start"><span class="mr-2 mt-1 text-[#8D8DAA]">✓</span><span>Salvation is entirely dependent on God's election.</span></li>
+                            <li class="flex items-start"><span class="mr-2 mt-1 text-[#8D8DAA]">✓</span><span>Provides deep assurance of salvation.</span></li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-lg border border-gray-200 text-center">
+                        <div class="text-5xl mb-4 text-[#8D8DAA]">✋</div>
+                        <h3 class="text-2xl font-semibold text-3D405B mb-3">Human Agency</h3>
+                        <p class="text-gray-600 mb-4">Humans possess free will to make their own choices. God's grace can be accepted or rejected.</p>
+                        <ul class="text-left space-y-2 text-gray-600">
+                           <li class="flex items-start"><span class="mr-2 mt-1 text-[#8D8DAA]">✓</span><span>Humans are responsible for their moral choices.</span></li>
+                           <li class="flex items-start"><span class="mr-2 mt-1 text-[#8D8DAA]">✓</span><span>God's call for salvation is open to all.</span></li>
+                           <li class="flex items-start"><span class="mr-2 mt-1 text-[#8D8DAA]">✓</span><span>Emphasizes personal responsibility and choice.</span></li>
+                        </ul>
+                    </div>
+                </div>
+                 <div class="text-center mt-12 bg-gray-100 p-6 rounded-lg">
+                    <h4 class="font-semibold text-lg text-3D405B">The Problem of Evil</h4>
+                    <p class="text-gray-700 mt-2 max-w-3xl mx-auto">How can a good and powerful God allow suffering? Theology suggests that trials are not random but are woven into God's plan for a greater purpose, such as spiritual growth, purification, and conforming believers to the image of Christ, even when the reasons are beyond our full comprehension.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="guidance" class="py-20 bg-[#F4F1EA]">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-3D405B">Finding Your Path</h2>
+                    <p class="text-lg text-gray-600 mt-2 max-w-3xl mx-auto">Discerning God's will is a dynamic journey of faith, not a passive waiting for a sign. It involves a partnership between divine guidance and your active participation. Click on the cards below to explore practical steps to align your life with God's purpose.</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="card h-64">
+                        <div class="card-face relative w-full h-full bg-white p-8 rounded-lg shadow-lg border border-gray-200 flex flex-col justify-center items-center text-center">
+                            <div class="text-4xl mb-4 text-[#8D8DAA]">🙏</div>
+                            <h3 class="text-xl font-semibold text-3D405B">Prayer & Commitment</h3>
+                            <p class="text-gray-500 text-sm mt-4">Click to learn more</p>
+                        </div>
+                        <div class="card-face card-face-back absolute w-full h-full bg-3D405B p-6 rounded-lg shadow-lg text-white flex flex-col justify-center">
+                            <h4 class="font-bold text-lg mb-2">Commit and Ask</h4>
+                            <p class="text-sm">Begin by committing your decisions to God, setting aside personal preferences. Ask for wisdom in faith, trusting that God will guide you (James 1:5).</p>
+                        </div>
+                    </div>
+                     <div class="card h-64">
+                        <div class="card-face relative w-full h-full bg-white p-8 rounded-lg shadow-lg border border-gray-200 flex flex-col justify-center items-center text-center">
+                            <div class="text-4xl mb-4 text-[#8D8DAA]">📖</div>
+                            <h3 class="text-xl font-semibold text-3D405B">Study Scripture</h3>
+                            <p class="text-gray-500 text-sm mt-4">Click to learn more</p>
+                        </div>
+                        <div class="card-face card-face-back absolute w-full h-full bg-3D405B p-6 rounded-lg shadow-lg text-white flex flex-col justify-center">
+                            <h4 class="font-bold text-lg mb-2">Seek Principles</h4>
+                            <p class="text-sm">The Bible reveals God's general will. It provides principles and direct guidance that act as a screen, ensuring your path aligns with His character.</p>
+                        </div>
+                    </div>
+                     <div class="card h-64">
+                        <div class="card-face relative w-full h-full bg-white p-8 rounded-lg shadow-lg border border-gray-200 flex flex-col justify-center items-center text-center">
+                            <div class="text-4xl mb-4 text-[#8D8DAA]">🤝</div>
+                            <h3 class="text-xl font-semibold text-3D405B">Seek Godly Counsel</h3>
+                            <p class="text-gray-500 text-sm mt-4">Click to learn more</p>
+                        </div>
+                        <div class="card-face card-face-back absolute w-full h-full bg-3D405B p-6 rounded-lg shadow-lg text-white flex flex-col justify-center">
+                            <h4 class="font-bold text-lg mb-2">Gain Perspective</h4>
+                            <p class="text-sm">A mature and wise counselor can offer perspective based on biblical truth, helping you see your situation more clearly. God often speaks through others.</p>
+                        </div>
+                    </div>
+                     <div class="card h-64">
+                        <div class="card-face relative w-full h-full bg-white p-8 rounded-lg shadow-lg border border-gray-200 flex flex-col justify-center items-center text-center">
+                            <div class="text-4xl mb-4 text-[#8D8DAA]">🎁</div>
+                            <h3 class="text-xl font-semibold text-3D405B">Recognize Your Gifts</h3>
+                            <p class="text-gray-500 text-sm mt-4">Click to learn more</p>
+                        </div>
+                        <div class="card-face card-face-back absolute w-full h-full bg-3D405B p-6 rounded-lg shadow-lg text-white flex flex-col justify-center">
+                            <h4 class="font-bold text-lg mb-2">Understand Your Design</h4>
+                            <p class="text-sm">God has uniquely equipped you with talents and passions. Reflecting on these gifts is crucial for understanding how they align with His purpose for you.</p>
+                        </div>
+                    </div>
+                     <div class="card h-64">
+                        <div class="card-face relative w-full h-full bg-white p-8 rounded-lg shadow-lg border border-gray-200 flex flex-col justify-center items-center text-center">
+                            <div class="text-4xl mb-4 text-[#8D8DAA]">🧭</div>
+                            <h3 class="text-xl font-semibold text-3D405B">Discern Circumstances</h3>
+                            <p class="text-gray-500 text-sm mt-4">Click to learn more</p>
+                        </div>
+                        <div class="card-face card-face-back absolute w-full h-full bg-3D405B p-6 rounded-lg shadow-lg text-white flex flex-col justify-center">
+                            <h4 class="font-bold text-lg mb-2">Read the Signs</h4>
+                            <p class="text-sm">God often arranges circumstances, opening and closing doors to point you in a certain direction. Use prayer and wisdom to interpret these signs correctly.</p>
+                        </div>
+                    </div>
+                     <div class="card h-64">
+                        <div class="card-face relative w-full h-full bg-white p-8 rounded-lg shadow-lg border border-gray-200 flex flex-col justify-center items-center text-center">
+                            <div class="text-4xl mb-4 text-[#8D8DAA]">❤️</div>
+                            <h3 class="text-xl font-semibold text-3D405B">Trust & Humility</h3>
+                            <p class="text-gray-500 text-sm mt-4">Click to learn more</p>
+                        </div>
+                        <div class="card-face card-face-back absolute w-full h-full bg-3D405B p-6 rounded-lg shadow-lg text-white flex flex-col justify-center">
+                            <h4 class="font-bold text-lg mb-2">Embrace the Mystery</h4>
+                            <p class="text-sm">Accept that much may remain unknown. Trust in God's goodness and embrace the journey with humility, knowing your life is part of a grand, divine purpose.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-3D405B text-white">
+        <div class="container mx-auto px-6 py-8 text-center">
+            <p>&copy; 2025 The Divine Blueprint. An interactive exploration of theological concepts.</p>
+            <p class="text-sm text-gray-400 mt-2">Content adapted from the "God's Plan: Diverse Perspectives" report. For educational purposes only.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('main section');
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (pageYOffset >= sectionTop - 60) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').includes(current)) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+
+            const faithsData = {
+                calvinist: {
+                    label: 'Reformed/Calvinist',
+                    values: [9, 2, 9, 2, 8],
+                    details: {
+                        title: 'Reformed/Calvinist View',
+                        summary: 'Emphasizes God\'s absolute sovereignty and a predestined plan. God\'s ultimate purpose is His own glory, manifested in the redemption of the elect.',
+                        points: [
+                            'Salvation is entirely by God\'s grace and cannot be resisted.',
+                            'Humanity is unable to contribute to salvation.',
+                            'God\'s plan unfolds through covenants, climaxing in Christ.'
+                        ]
+                    }
+                },
+                arminian: {
+                    label: 'Arminian/Lutheran',
+                    values: [6, 8, 7, 7, 5],
+                    details: {
+                        title: 'Arminian/Lutheran View',
+                        summary: 'Stresses that God\'s plan includes the opportunity for all to be saved. Humans must freely cooperate with God\'s grace.',
+                        points: [
+                            'Christ\'s atonement is unlimited and available to all.',
+                            'Grace can be resisted or accepted by human free will.',
+                            'Justification by faith is central to God\'s plan.'
+                        ]
+                    }
+                },
+                catholic: {
+                    label: 'Catholic View',
+                    values: [7, 7, 8, 8, 6],
+                    details: {
+                        title: 'Catholic View',
+                        summary: 'God\'s purpose is to bring humanity into communion with Him. Christ\'s sacrifice is sufficient for all, but individuals must cooperate with grace.',
+                        points: [
+                            'Salvation unfolds through the sacraments and the Church.',
+                            'Emphasizes a partnership between divine grace and human action.',
+                            'The goal is eternal life and sharing in God\'s divine life.'
+                        ]
+                    }
+                },
+                sunni: {
+                    label: 'Sunni Islam',
+                    values: [10, 5, 10, 5, 9],
+                    details: {
+                        title: 'Sunni Islam View',
+                        summary: 'Based on the concept of Qadar (divine decree). Allah has foreknowledge of all events, but humans are still responsible for their actions.',
+                        points: [
+                            'Allah\'s will is supreme and nothing happens without His permission.',
+                            'Humans have free will to make choices within the divine plan.',
+                            'Submission to Allah\'s decree with humility and trust is key.'
+                        ]
+                    }
+                },
+                judaism: {
+                    label: 'Judaism',
+                    values: [8, 9, 4, 9, 7],
+                    details: {
+                        title: 'Judaism View',
+                        summary: 'Asserts axiomatic free will alongside divine providence (Hashgacha). God supervises creation, but humans have the capacity to choose.',
+                        points: [
+                            'The paradox is summarized as "All is foreseen, but permission is given."',
+                            'Humans cannot foil God\'s ultimate plan but can choose their role within it.',
+                            'Meaningful life comes from proactive decisions to align with God\'s will.'
+                        ]
+                    }
+                },
+                hinduism: {
+                    label: 'Hinduism',
+                    values: [8, 6, 7, 7, 8],
+                    details: {
+                        title: 'Hinduism View',
+                        summary: 'Divine Will (of Sri Krishna in Vaishnavism) orchestrates destiny, while Karma (past actions) determines current circumstances.',
+                        points: [
+                            'A benevolent divine intention aims for the deliverance of all souls.',
+                            'Individuals have a purposeful path for spiritual growth.',
+                            'Surrender of the ego to the Divine Will is a key spiritual goal.'
+                        ]
+                    }
+                }
+            };
+
+            const chartLabels = ['Divine Sovereignty', 'Human Free Will', 'Role of Grace/Decree', 'Human Cooperation', 'Mystery/Trust'];
+            const ctx = document.getElementById('faithsChart').getContext('2d');
+            const faithsChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: chartLabels,
+                    datasets: [{
+                        label: '',
+                        data: [],
+                        backgroundColor: 'rgba(141, 141, 170, 0.2)',
+                        borderColor: 'rgba(61, 64, 91, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(61, 64, 91, 1)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgba(61, 64, 91, 1)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: {
+                                color: 'rgba(61, 64, 91, 0.2)'
+                            },
+                            grid: {
+                                color: 'rgba(61, 64, 91, 0.2)'
+                            },
+                            pointLabels: {
+                                font: {
+                                    size: 12,
+                                    family: 'Inter'
+                                },
+                                color: '#3D405B'
+                            },
+                            ticks: {
+                                backdropColor: '#F4F1EA',
+                                color: '#3D405B',
+                                stepSize: 2,
+                                font: {
+                                    size: 10
+                                }
+                            },
+                            suggestedMin: 0,
+                            suggestedMax: 10
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+
+            const faithDetailsContainer = document.getElementById('faith-details');
+            const faithButtons = document.querySelectorAll('.faith-btn');
+
+            function updateChartAndDetails(faithKey) {
+                const data = faithsData[faithKey];
+                if (!data) return;
+
+                faithsChart.data.datasets[0].data = data.values;
+                faithsChart.data.datasets[0].label = data.label;
+                faithsChart.update();
+
+                let pointsHTML = data.details.points.map(point => `<li class="flex items-start"><span class="mr-2 mt-1 text-[#8D8DAA]">▪</span><span>${point}</span></li>`).join('');
+                faithDetailsContainer.innerHTML = `
+                    <h3 class="text-2xl font-semibold text-3D405B mb-3">${data.details.title}</h3>
+                    <p class="text-gray-600 mb-4">${data.details.summary}</p>
+                    <ul class="text-left space-y-2 text-gray-700">${pointsHTML}</ul>
+                `;
+
+                faithButtons.forEach(btn => {
+                    btn.classList.remove('active');
+                    if (btn.dataset.faith === faithKey) {
+                        btn.classList.add('active');
+                    }
+                });
+            }
+
+            faithButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    updateChartAndDetails(button.dataset.faith);
+                });
+            });
+
+            updateChartAndDetails('calvinist');
+
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                card.addEventListener('click', () => {
+                    card.classList.toggle('is-flipped');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+

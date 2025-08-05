@@ -1,0 +1,31 @@
+{
+  "name": "anchorstack-vault-automation",
+  "version": "1.0.0",
+  "description": "Automated vault content management for AnchorStack",
+  "scripts": {
+    "vault:scan": "ts-node scripts/vault-automation.ts",
+    "vault:full": "ts-node scripts/vault-automation.ts --move-files --generate-pages",
+    "vault:move": "ts-node scripts/vault-automation.ts --move-files",
+    "vault:pages": "ts-node scripts/vault-automation.ts --generate-pages",
+    "vault:refresh": "ts-node scripts/vault-automation.ts --update-tiers --generate-pages",
+    "vault:watch": "nodemon --watch 'public/vault-content/**/*' --ext 'pdf,docx,txt,md,html,zip' --exec 'npm run vault:scan'",
+    "vault:deploy": "npm run vault:full && npm run build",
+    "vault:backup": "node scripts/backup-vault.js",
+    "vault:validate": "node scripts/validate-vault.js",
+    "vault:stats": "node scripts/vault-stats.js"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "nodemon": "^2.0.20",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.0",
+    "chokidar": "^3.5.3",
+    "mammoth": "^1.4.21",
+    "pdf-parse": "^1.1.1"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "lucide-react": "^0.263.1"
+  }
+}

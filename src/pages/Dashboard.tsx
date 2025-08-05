@@ -1,13 +1,17 @@
-// src/pages/Dashboard.tsx
-import React from 'react';
+import React from "react";
 
-const Dashboard: React.FC = () => {
+function Dashboard() {
   return (
-<div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">📊 Dashboard</h1>
-      <p>Welcome to your dashboard. This is a placeholder component.</p>
+    <div style={{ padding: "2rem" }}>
+      <h1 style={{ fontSize: "28px", fontWeight: "bold", marginBottom: "1rem" }}>
+        ⚓ Sacred Strategy Dashboard
+      </h1>
+      <p style={{ fontSize: "16px", color: "#374151" }}>
+        Welcome to your Creator Control Center. Track your faith-fueled sessions, browse tools, and stay anchored in your mission.
+      </p>
     </div>
   );
-};
+}
 
 export default Dashboard;
+

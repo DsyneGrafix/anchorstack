@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Levitical Priesthood: An Interactive Exploration</title>
+<meta name="description" content="Explore the priesthood of ancient Israel through interactive charts, visual timelines, and biblical insights — from Aaron to Jesus.">
+<meta property="og:title" content="The Levitical Priesthood: An Interactive Exploration" />
+<meta property="og:description" content="Dive into the history, structure, and spiritual significance of the Levitical priesthood. Includes comparison charts and tabbed study features." />
+<meta property="og:image" content="https://anchorstack.pro/images/levitical-preview.jpg" />
+<meta property="og:url" content="https://anchorstack.pro/vault-content/levitical-priesthood-interactive.html" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals -->
+    <!-- Application Structure Plan: A thematic, dashboard-style SPA is chosen over a linear document structure to enhance user engagement and facilitate non-linear exploration. The core design uses a sticky top navigation to jump between four main thematic sections: 'Overview', 'Roles & Hierarchy', 'Historical Journey', and 'Theological Significance'. This structure breaks down the dense report into digestible, user-selectable topics. The 'Roles' section uses an interactive tab system for direct comparison. The 'History' section employs a clickable timeline to make chronological data explorable. The 'Theology' section uses an interactive donut chart to visualize and explain the types of sacrifices. This design prioritizes user interaction and comprehension by transforming static tables and text into dynamic, explorable components, making the complex information more accessible and engaging. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: Hierarchical roles (High Priest, Priests, Levites). Goal: Compare. Viz/Presentation: Interactive Tabs. Interaction: Click to switch content. Justification: Allows for easy, side-by-side comparison of duties without overwhelming the user, superior to a static table. Library/Method: Vanilla JS.
+        - Report Info: Historical evolution across four eras. Goal: Show Change. Viz/Presentation: Clickable Horizontal Timeline. Interaction: Click era to display details. Justification: Visually represents the flow of time and makes historical periods distinct and discoverable. Library/Method: HTML/CSS/JS.
+        - Report Info: Types of sacrifices. Goal: Organize/Compare. Viz/Presentation: Interactive Donut Chart with a details panel. Interaction: Click chart segment to update details. Justification: Engages the user visually and connects the data point (sacrifice type) directly to its detailed explanation. Library/Method: Chart.js.
+        - Report Info: General textual content (origins, requirements, theology). Goal: Inform. Viz/Presentation: Styled content cards. Interaction: Static display. Justification: Organizes text into clean, readable blocks with clear hierarchy. Library/Method: HTML/Tailwind CSS.
+        - CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDFBF7;
+            color: #4A4A4A;
+        }
+        .nav-link {
+            transition: color 0.3s, border-bottom-color 0.3s;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #A97C50;
+            border-bottom-color: #A97C50;
+        }
+        .tab.active {
+            background-color: #A97C50;
+            color: #FFFFFF;
+        }
+        .timeline-item {
+            cursor: pointer;
+            transition: transform 0.2s, color 0.2s;
+        }
+        .timeline-item:hover {
+            transform: scale(1.05);
+        }
+        .timeline-item.active .timeline-dot {
+            background-color: #A97C50;
+            transform: scale(1.5);
+        }
+        .timeline-item.active .timeline-date {
+            color: #A97C50;
+            font-weight: 700;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 450px;
+            margin-left: auto;
+            margin-right: auto;
+            height: auto;
+            min-height: 300px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                min-height: 400px;
+            }
+        }
+        .content-card {
+            background-color: #FFFFFF;
+            border: 1px solid #EAEAEA;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+            transition: box-shadow 0.3s ease-in-out;
+        }
+        .content-card:hover {
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.07), 0 4px 6px -4px rgb(0 0 0 / 0.07);
+        }
+        .btn-primary {
+            background-color: #A97C50;
+            color: #FFFFFF;
+            transition: background-color 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #8E653E;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-xl md:text-2xl font-bold text-[#A97C50]">The Levitical Priesthood</h1>
+            <div class="hidden md:flex space-x-8">
+                <a href="#overview" class="nav-link pb-1 border-b-2 border-transparent">Overview</a>
+                <a href="#roles" class="nav-link pb-1 border-b-2 border-transparent">Roles & Hierarchy</a>
+                <a href="#history" class="nav-link pb-1 border-b-2 border-transparent">Historical Journey</a>
+                <a href="#theology" class="nav-link pb-1 border-b-2 border-transparent">Theological Significance</a>
+            </div>
+            <div class="md:hidden">
+                <select id="mobile-nav" class="bg-white border border-gray-300 rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-[#A97C50]">
+                    <option value="#overview">Overview</option>
+                    <option value="#roles">Roles & Hierarchy</option>
+                    <option value="#history">Historical Journey</option>
+                    <option value="#theology">Theological Significance</option>
+                </select>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+
+        <section id="overview" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-center mb-4">A Divine Institution</h2>
+            <p class="max-w-3xl mx-auto text-center text-lg text-gray-600 mb-12">
+                The Levitical Priesthood was a foundational class of priests and ministers in ancient Israel, established by divine command. This interactive experience explores their origins, complex duties, historical evolution, and profound theological legacy.
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="content-card p-8">
+                    <h3 class="text-2xl font-bold mb-4 text-[#A97C50]">Origins & Selection</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        The priesthood descends from **Levi**, one of Jacob's twelve sons. Within this tribe, the direct priestly line was established through **Aaron**, Moses's elder brother, who became the first high priest. Initially, the firstborn of every family was consecrated to God, but the Levites were chosen to replace them. This centralized religious duties within a single, dedicated tribe, a significant theological shift for the growing nation.
+                    </p>
+                </div>
+                <div class="content-card p-8">
+                    <h3 class="text-2xl font-bold mb-4 text-[#A97C50]">A Curse Turned Blessing</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        The Levites' zealous loyalty during the **Golden Calf incident** solidified their special status. This transformed Jacob's prophecy that Levi's descendants would be "scattered in Israel." What could have been a curse became a blessing: the Levites received no tribal territory but were dispersed among 48 cities. This unique arrangement allowed them to teach the Law and serve all of Israel, with God Himself as their ultimate inheritance.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <hr class="my-16 border-gray-200">
+
+        <section id="roles" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-center mb-4">Roles & Hierarchy</h2>
+            <p class="max-w-3xl mx-auto text-center text-lg text-gray-600 mb-12">
+                The Levitical system was a meticulously organized hierarchy with distinct roles and responsibilities. Click on each role to explore its unique functions, requirements, and sacred duties within Israel's religious life.
+            </p>
+
+            <div class="flex justify-center mb-8">
+                <div id="roles-tabs" class="flex space-x-1 bg-gray-200 p-1 rounded-full">
+                    <button class="tab px-4 py-2 rounded-full text-sm font-semibold" data-role="high-priest">High Priest</button>
+                    <button class="tab px-4 py-2 rounded-full text-sm font-semibold" data-role="priests">Priests (Kohanim)</button>
+                    <button class="tab px-4 py-2 rounded-full text-sm font-semibold" data-role="levites">Levites</button>
+                </div>
+            </div>
+
+            <div id="roles-content" class="content-card p-8 min-h-[300px] max-w-4xl mx-auto">
+            </div>
+        </section>
+        
+        <hr class="my-16 border-gray-200">
+
+        <section id="history" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-center mb-4">A Historical Journey</h2>
+            <p class="max-w-3xl mx-auto text-center text-lg text-gray-600 mb-12">
+                The priesthood's function and structure evolved dramatically over centuries, adapting to monumental shifts in Israel's history. Explore this evolution by clicking on key periods in the timeline below.
+            </p>
+
+            <div class="w-full max-w-5xl mx-auto">
+                <div class="relative">
+                    <div class="absolute left-1/2 h-full w-0.5 bg-gray-300"></div>
+                    <div id="timeline-container" class="relative flex flex-col items-center space-y-16 py-8">
+                    </div>
+                </div>
+                <div id="history-content" class="content-card p-8 min-h-[250px] mt-8">
+                </div>
+            </div>
+        </section>
+
+        <hr class="my-16 border-gray-200">
+
+        <section id="theology" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-center mb-4">Theological Significance</h2>
+             <p class="max-w-3xl mx-auto text-center text-lg text-gray-600 mb-12">
+                The Levitical system was rich with theological meaning, addressing the relationship between a holy God and humanity. It established principles of mediation and atonement that have had a lasting impact. Explore the different sacrifices and their purposes through the interactive chart below.
+            </p>
+
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="chart-container">
+                    <canvas id="sacrifices-chart"></canvas>
+                </div>
+                <div class="space-y-6">
+                    <h3 class="text-2xl font-bold text-center lg:text-left text-[#A97C50]">Types of Sacrifices</h3>
+                    <div id="sacrifice-details" class="content-card p-6 min-h-[200px]">
+                        <p class="text-gray-600">Click on a section of the chart to learn about the purpose and characteristics of each type of sacrifice.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 mt-16">
+                <div class="content-card p-8">
+                    <h3 class="text-2xl font-bold mb-4 text-[#A97C50]">Foreshadowing Christ</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        In Christian theology, the Levitical Priesthood is seen as a foreshadowing of Jesus Christ. The repetitive animal sacrifices pointed toward a perfect, final sacrifice. The High Priest's entry into the Most Holy Place prefigured Christ's role as the ultimate mediator. The New Testament presents Christ as a superior High Priest in the order of Melchizedek, whose permanent priesthood and once-for-all sacrifice fulfilled and superseded the Levitical system.
+                    </p>
+                </div>
+                <div class="content-card p-8">
+                    <h3 class="text-2xl font-bold mb-4 text-[#A97C50]">Priesthood of All Believers</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        A radical New Testament concept is the "priesthood of all believers." Because of Christ's completed work, all Christians are considered to have direct access to God, removing the need for a human intermediary. This doesn't mean offering atoning sacrifices, but rather "spiritual sacrifices" like praise and holy living. This democratized access to God, fulfilling the original promise for Israel to be a "kingdom of priests" in a new, comprehensive way.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-100 mt-16">
+        <div class="container mx-auto px-6 py-8 text-center text-gray-500">
+            <p>An Interactive Exploration of the Levitical Priesthood.</p>
+            <p class="text-sm mt-2">Content derived from a comprehensive research report. Application designed for educational purposes.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            const rolesData = {
+                'high-priest': {
+                    title: 'The High Priest',
+                    content: `
+                        <p class="text-gray-700 leading-relaxed mb-4">The highest office, held by one Aaronic priest. The High Priest had ultimate oversight of all priestly functions and served as the nation's chief spiritual representative.</p>
+                        <ul class="list-disc list-inside text-gray-700 space-y-2">
+                            <li><strong>Unique Duty:</strong> Entered the Most Holy Place (Holy of Holies) once a year on the Day of Atonement (Yom Kippur).</li>
+                            <li><strong>Purpose:</strong> To make atonement for his own sins and the sins of the entire nation of Israel.</li>
+                            <li><strong>Requirements:</strong> Held to the strictest purity laws, even more so than other priests. Could only marry a virgin.</li>
+                            <li><strong>Significance:</strong> This role underscored the profound holiness of God and the gravity of sin, highlighting the need for a perfect mediator between God and humanity.</li>
+                        </ul>
+                    `
+                },
+                'priests': {
+                    title: 'Priests (Kohanim)',
+                    content: `
+                        <p class="text-gray-700 leading-relaxed mb-4">Descendants of Aaron who served as direct mediators between God and the people. Their duties were central to the daily and ceremonial life of Israel.</p>
+                        <ul class="list-disc list-inside text-gray-700 space-y-2">
+                            <li><strong>Primary Role:</strong> Conducted the sacrificial services at the Tabernacle and later the Temple.</li>
+                            <li><strong>Specific Duties:</strong> Offered burnt, grain, sin, and peace offerings; maintained the sanctuary by lighting the menorah and burning incense; taught the Law; and served as judges in religious disputes.</li>
+                            <li><strong>Authority:</strong> Divinely authorized to bless the people, solidifying their role as channels of divine favor.</li>
+                            <li><strong>Requirements:</strong> Had to be a male descendant of Aaron without physical blemish and adhere to strict purity and marital laws.</li>
+                        </ul>
+                    `
+                },
+                'levites': {
+                    title: 'Levites (Non-Priestly)',
+                    content: `
+                        <p class="text-gray-700 leading-relaxed mb-4">Members of the tribe of Levi not descended from Aaron. They served as essential assistants to the priests and guardians of the sanctuary.</p>
+                        <ul class="list-disc list-inside text-gray-700 space-y-2">
+                            <li><strong>Supporting Role:</strong> Assisted priests in preparing sacrifices and handling sacred vessels.</li>
+                            <li><strong>Wilderness Duty:</strong> Responsible for transporting and protecting the Tabernacle and its furnishings.</li>
+                            <li><strong>Temple Duty:</strong> Evolved to include roles as musicians, singers, scribes, and judges.</li>
+                            <li><strong>Guardian Function:</strong> Acted as a "buffer zone" around the sanctuary, protecting the people from the dangerous holiness of God's direct presence.</li>
+                        </ul>
+                    `
+                }
+            };
+
+            const historyData = {
+                'wilderness': {
+                    title: 'Wilderness Period (c. 1446-1406 BCE)',
+                    content: `
+                        <p class="text-gray-700 leading-relaxed">During Israel's 40-year sojourn, the priesthood was established around the portable <strong>Tabernacle</strong>. The Levites' primary role was to guard, pack, and transport this "portable divine presence," solidifying their identity as mediators for a nomadic nation. This era was defined by adaptability and the centrality of God's presence on the journey.</p>
+                    `,
+                    figures: 'Aaron, Moses, Tribe of Levi'
+                },
+                'first-temple': {
+                    title: 'First Temple Period (c. 1000-587 BCE)',
+                    content: `
+                        <p class="text-gray-700 leading-relaxed">With the construction of <strong>Solomon's Temple</strong>, worship became centralized in Jerusalem. The priesthood was institutionalized, with the <strong>Zadokite</strong> line gaining prominence and King David organizing priests into 24 service divisions. This period brought stability and prestige but also made the priesthood vulnerable to the Temple's destruction by Babylon, which halted all services.</p>
+                    `,
+                    figures: 'King David, King Solomon, Zadokite Priesthood'
+                },
+                'second-temple': {
+                    title: 'Second Temple Period (c. 516 BCE - 70 CE)',
+                    content: `
+                        <p class="text-gray-700 leading-relaxed">After the return from exile, the Temple was rebuilt, but the priesthood faced new challenges. The era saw the rise of religious sects like the Sadducees (who were mainly priests) and the politicization of the high priesthood. The <strong>Hasmonean</strong> dynasty usurped the office, and later, Roman rulers appointed high priests like <strong>Annas and Caiaphas</strong>, compromising its traditional lineage before the Temple's final destruction in 70 CE.</p>
+                    `,
+                    figures: 'Ezra, Hasmoneans, Sadducees, Annas, Caiaphas'
+                },
+                'post-temple': {
+                    title: 'Post-Temple Period (70 CE - Present)',
+                    content: `
+                        <p class="text-gray-700 leading-relaxed">The destruction of the Second Temple ended sacrificial duties. <strong>Rabbinic Judaism</strong> emerged, shifting focus to Torah, prayer, and law. However, the legacy of the priesthood endures. In modern synagogues, <strong>Kohanim</strong> (priests) and <strong>Levites</strong> retain a special status, receiving the first Torah honors and performing specific blessings, demonstrating a remarkable adaptation of tradition.</p>
+                    `,
+                    figures: 'Kohanim and Levites (descendants)'
+                }
+            };
+            
+            const sacrificesData = [
+                { label: 'Burnt Offering', purpose: 'Represents complete devotion and general atonement for sin. The entire animal was consumed on the altar, its smoke ascending to God.' },
+                { label: 'Grain Offering', purpose: 'A bloodless offering of thanksgiving and dedication, typically made of flour, oil, and frankincense. It often accompanied burnt offerings.' },
+                { label: 'Sin Offering', purpose: 'Provided atonement for unintentional sins and purification from ritual impurity. The type of animal depended on the offerer\'s social status.' },
+                { label: 'Guilt Offering', purpose: 'Atoned for sins requiring restitution, such as desecrating sacred items or defrauding a neighbor. It included repayment plus a 20% penalty.' },
+                { label: 'Peace Offering', purpose: 'Celebrated fellowship with God. Portions were shared between the altar, the priest, and the worshiper in a communal meal.' }
+            ];
+
+
+            const rolesTabsContainer = document.getElementById('roles-tabs');
+            const rolesContentContainer = document.getElementById('roles-content');
+
+            function updateRoleContent(role) {
+                const data = rolesData[role];
+                rolesContentContainer.innerHTML = `
+                    <h3 class="text-2xl font-bold mb-4 text-[#A97C50]">${data.title}</h3>
+                    ${data.content}
+                `;
+                rolesTabsContainer.querySelectorAll('.tab').forEach(t => {
+                    t.classList.toggle('active', t.dataset.role === role);
+                });
+            }
+
+            rolesTabsContainer.addEventListener('click', (e) => {
+                if (e.target.classList.contains('tab')) {
+                    const role = e.target.dataset.role;
+                    updateRoleContent(role);
+                }
+            });
+
+            updateRoleContent('high-priest');
+            
+            const timelineContainer = document.getElementById('timeline-container');
+            const historyContentContainer = document.getElementById('history-content');
+            
+            Object.keys(historyData).forEach((key, index) => {
+                const data = historyData[key];
+                const isLeft = index % 2 === 0;
+                const timelineItem = document.createElement('div');
+                timelineItem.className = `timeline-item flex w-full ${isLeft ? 'justify-start' : 'justify-end'}`;
+                timelineItem.dataset.history = key;
+                
+                timelineItem.innerHTML = `
+                    <div class="w-1/2 ${isLeft ? 'pr-8 text-right' : 'pl-8 text-left'}">
+                        <div class="p-4 bg-white rounded-lg shadow-md border border-gray-200">
+                            <p class="timeline-date font-bold text-lg">${data.title.split('(')[0].trim()}</p>
+                            <p class="text-sm text-gray-500">${data.title.match(/\((.*?)\)/)[0]}</p>
+                        </div>
+                    </div>
+                    <div class="absolute left-1/2 -translate-x-1/2 w-6 h-6 bg-gray-300 rounded-full border-4 border-white timeline-dot transition-transform"></div>
+                `;
+                timelineContainer.appendChild(timelineItem);
+            });
+            
+            function updateHistoryContent(period) {
+                const data = historyData[period];
+                historyContentContainer.innerHTML = `
+                    <h3 class="text-2xl font-bold mb-4 text-[#A97C50]">${data.title}</h3>
+                    ${data.content}
+                    <p class="text-sm text-gray-500 mt-4"><strong>Key Figures/Lineages:</strong> ${data.figures}</p>
+                `;
+                 timelineContainer.querySelectorAll('.timeline-item').forEach(item => {
+                    item.classList.toggle('active', item.dataset.history === period);
+                });
+            }
+
+            timelineContainer.addEventListener('click', (e) => {
+                const item = e.target.closest('.timeline-item');
+                if (item) {
+                    const period = item.dataset.history;
+                    updateHistoryContent(period);
+                }
+            });
+
+            updateHistoryContent('wilderness');
+
+            const sacrificesCtx = document.getElementById('sacrifices-chart').getContext('2d');
+            const sacrificeDetailsContainer = document.getElementById('sacrifice-details');
+            
+            const sacrificesChart = new Chart(sacrificesCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: sacrificesData.map(s => s.label),
+                    datasets: [{
+                        label: 'Types of Sacrifices',
+                        data: [1, 1, 1, 1, 1],
+                        backgroundColor: [
+                            '#A97C50',
+                            '#C39C75',
+                            '#D8B898',
+                            '#EAD5BB',
+                            '#F5E8DA'
+                        ],
+                        borderColor: '#FDFBF7',
+                        borderWidth: 4,
+                        hoverOffset: 10
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                font: {
+                                    size: 12
+                                },
+                                boxWidth: 20,
+                                padding: 20
+                            }
+                        },
+                        tooltip: {
+                            enabled: true
+                        }
+                    },
+                    cutout: '50%',
+                    onClick: (event, elements) => {
+                        if (elements.length > 0) {
+                            const index = elements[0].index;
+                            const data = sacrificesData[index];
+                            sacrificeDetailsContainer.innerHTML = `
+                                <h4 class="font-bold text-lg text-gray-800">${data.label}</h4>
+                                <p class="text-gray-600 mt-2">${data.purpose}</p>
+                            `;
+                        }
+                    }
+                }
+            });
+
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('section');
+            
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (pageYOffset >= sectionTop - 100) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').substring(1) === current) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+            
+            const mobileNav = document.getElementById('mobile-nav');
+            mobileNav.addEventListener('change', (e) => {
+                window.location.hash = e.target.value;
+            });
+
+        });
+    </script>
+<footer style="text-align: center; font-size: 0.85rem; color: #3333; margin-top: 2rem;"> © Copyright AnchorStack.pro 2025 — All rights reserved. <br>Part of the CreatorOS Wisdom Vault Initiative. </footer>
+</body>
+</html>
+

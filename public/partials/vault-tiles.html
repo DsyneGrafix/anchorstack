@@ -1,0 +1,49 @@
+
+<style>
+  .vault-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    padding: 1rem;
+  }
+  .vault-tile {
+    background: #f9f9f9;
+    border-radius: 1rem;
+    padding: 1.25rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .vault-tile:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  }
+  .vault-tile h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+  .vault-tile p {
+    margin: 0.25rem 0;
+    font-size: 0.95rem;
+  }
+  .vault-tile .btn {
+    display: inline-block;
+    margin-top: 0.5rem;
+    padding: 0.4rem 0.8rem;
+    background: #007bff;
+    color: #fff;
+    border-radius: 0.4rem;
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+</style>
+
+<div class="vault-grid">
+  <div class="vault-tile">
+    <h3>Gold Drop Example</h3>
+    <p><strong>Tier:</strong> Gold – $29</p>
+    <p><strong>Category:</strong> Toolkit</p>
+    <p><strong>Drops On:</strong> 2025-08-20</p>
+    <a href="/vault/gold/sample.md" class="btn">View Drop</a>
+  </div>
+</div>
+

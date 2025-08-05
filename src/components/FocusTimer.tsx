@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { Play, Pause, RotateCcw, Coffee, Target } from 'lucide-react'
 import { useTimerStore } from '@/store/useTimerStore'
 import { Button } from '@/components/ui/Button'
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card'
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 
 export const FocusTimer: React.FC = () => {
   const {
@@ -72,7 +72,8 @@ export const FocusTimer: React.FC = () => {
       <CardContent className="space-y-6">
         <div className="text-center">
           <div className="relative inline-block">
-            <svg className="w-48 h-48 transform -rotate-90" viewBox="0 0 100 100">
+            <svg className="w-32 h-32 transform -rotate-90" viewBox="0 0 100 100">
+
               <circle
                 cx="50"
                 cy="50"

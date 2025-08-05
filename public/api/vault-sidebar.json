@@ -1,0 +1,14 @@
+{
+  "Gold": [
+    {
+      "filename": "sample.md",
+      "title": "Gold Drop Example",
+      "tier": "Gold",
+      "value": "$29",
+      "category": "Toolkit",
+      "status": "draft",
+      "dropsOn": "2025-08-20",
+      "source": "gold/sample.md"
+    }
+  ]
+}

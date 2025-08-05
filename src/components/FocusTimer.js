@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { Play, Pause, RotateCcw, Coffee, Target } from 'lucide-react';
 import { useTimerStore } from '@/store/useTimerStore';
 import { Button } from '@/components/ui/Button';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 export const FocusTimer = () => {
     const { timeLeft, isActive, currentSession, sessionsCompleted, isBreak, startTimer, pauseTimer, resetTimer, tick } = useTimerStore();
     useEffect(() => {

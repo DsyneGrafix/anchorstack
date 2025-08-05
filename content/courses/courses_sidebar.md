@@ -1,0 +1,3 @@
+- [Sacred Strategy Course](/courses/sacred-strategy-course.html)
+- [Clarity Tools Course](/courses/clarity-tools-course.html)
+- [BootyQuest Course](/courses/bootyquest-course.html)

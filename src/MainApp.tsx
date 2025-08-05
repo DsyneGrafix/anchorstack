@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import FocusTimer from "@/components/FocusTimer"
 import QuickNotes from "@/components/QuickNotes"
+import FocusPage from '@/pages/FocusPage'
 
+<Route path="/focus" element={<FocusPage />} />
 
 const quotes = [
   "Clarity comes when you stop forcing the answer.",

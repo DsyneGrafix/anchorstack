@@ -1,1 +1,0 @@
-{"root":["./src/App.tsx","./src/main.tsx","./src/vite-env.d.ts","./src/components/FocusTimer.tsx","./src/components/Layout.tsx","./src/components/QuickNotes.tsx","./src/pages/Dashboard.tsx","./src/store/useNotesStore.ts","./src/store/useTimerStore.ts","./src/types/index.ts","./src/utils/cn.ts"],"version":"5.8.3"}

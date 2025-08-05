@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative Voice Discovery Worksheet</title>
+    <style>
+        body {
+            font-family: Georgia, serif;
+            line-height: 1.6;
+            color: #2d3748;
+            background-color: #fff;
+            max-width: 8.5in;
+            margin: 0 auto;
+            padding: 1in;
+        }
+        .header {
+            text-align: center;
+            background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+        }
+        .title {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        .section {
+            background: #faf5ff;
+            border: 2px solid #8b5cf6;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            page-break-inside: avoid;
+        }
+        .question-box {
+            background: white;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .question {
+            font-weight: 600;
+            color: #6b21a8;
+            margin-bottom: 0.5rem;
+        }
+        .answer-space {
+            min-height: 3rem;
+            border-bottom: 1px solid #e5e7eb;
+            margin: 0.5rem 0;
+        }
+        .insight-box {
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
+            border-radius: 6px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .reflection-prompt {
+            background: #e0f2fe;
+            border-left: 4px solid #0ea5e9;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-style: italic;
+        }
+        .discovery-card {
+            background: #dcfce7;
+            border: 2px solid #16a34a;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        .section-number {
+            background: #8b5cf6;
+            color: white;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+        .footer {
+            text-align: center;
+            color: #718096;
+            font-size: 0.9rem;
+            margin-top: 3rem;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 1rem;
+        }
+        @media print {
+            body { margin: 0; padding: 0.5in; }
+            .section { page-break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1 class="title">✨ Creative Voice Discovery Worksheet</h1>
+        <p class="subtitle">Uncover what makes your creative perspective uniquely valuable</p>
+    </div>
+
+    <div style="background: #f7fafc; padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem;">
+        <h2 style="color: #2d3748; margin-bottom: 1rem;">Your Creative Voice Matters</h2>
+        <p>Many people think they're not creative because they're trying to be creative like someone else. The truth is, you already have a unique creative voice—it's the combination of your experiences, perspectives, values, and personality that no one else possesses.</p>
+        
+        <p>This worksheet will help you discover and articulate your creative voice through guided reflection and exercises. Take your time with each section, and remember: there are no wrong answers, only authentic ones.</p>
+        
+        <div style="background: #ede9fe; padding: 1rem; border-radius: 6px; margin: 1rem 0;">
+            <strong>💡 How to Use This Worksheet:</strong><br>
+            • Find a quiet space where you can think without interruption<br>
+            • Answer honestly—this is for you, not for others<br>
+            • If a question doesn't resonate, skip it and come back later<br>
+            • Look for patterns across your answers
+        </div>
+    </div>
+
+    <div class="section">
+        <h3><span class="section-number">1</span>Your Natural Lens</h3>
+        <p>Everyone sees the world through their own unique lens. These questions help identify your natural perspective and what draws your attention.</p>
+        
+        <div class="question-box">
+            <div class="question">What problems do you naturally notice that others seem to miss?</div>
+            <div class="reflection-prompt">Think about situations where you've said "Why doesn't anyone else see this?" or "How is this not bothering other people?"</div>
+            <div class="answer-space">_____________________________________________</div>
+            <div class="answer-space">_____________________________________________</div>
+            <div class="answer-space">_____________________________________________</div>
+        </div>
+
+        <div class="question-box">
+            <div class="question">What do you find beautiful that others might overlook?</div>
+            <div class="reflection-prompt">This could be anything—patterns, sounds, moments, ideas, textures, connections...</div>
+            <div class="answer-space">_____________________________________________</div>
+            <div class="answer-space">_____________________________________________</div>
+            <div class="answer-space">_____________________________________________</div>
+        </div>
+
+        <div class="question-box">
+            <div class="question">When you watch movies, read books, or see art, what themes consistently draw you in?</div>
+            <div class="answer-space">_____________________________________________</div>
+            <div class="answer-space">_____________________________________________</div>
+            <div class="answer-space">_____________________________________________</div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h3><span class="section-number">2</span>Your Hidden Strengths</h3>
+        <p>We often dismiss our greatest strengths because they come naturally to us. These questions help you recognize abilities you might be taking for granted.</p>
+        
+        <div class="question-box">
+            <div class="question">What compliments do people give you that you tend to dismiss or downplay?</div>
+            <div class="reflection-prompt">Think about feedback you've received that made you think "Anyone could do that" or "It's no big deal."</div>
+            <div class="answer-space">_____________________________________________</div>
+            <div class="answer-space">_____________________________________________</div>
+            <div class="answer-space">_____________________________________________</div>
+        </div>
+
+        <div class="question-box">
+            <div class="question">What do people often ask for your help with?</div>
+            <div class="answer-space">_____________________________________________</div>
+            <div class="answer-space">_____________________________________________</div>
+            <div class="answer-space">_____________________________________________</div>
+        </div>
+
+        <div class="question-box">
+            <div class="question">What feels easy to you but seems difficult for others?</div>
+            <div class="reflection-prompt">This could be anything—explaining complex ideas, organizing chaos, making people laugh, seeing solutions, etc.</div>
+            <div class="answer-space">_____________________________________________</div>
+            <div class="answer-space">_____________________________________________</div>
+            <div class="answer-space">_____________________________________________</div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h3><span class="section-number">3</span>Your Core Values & Experiences</h3>
+        <p>Your values and life experiences shape how you see and interact with the world. They're a crucial part of your creative voice.</p>
+        
+        <div class="question-box">
+            <div class="question">What experiences have shaped you the most?</div>
+            <div class="reflection-prompt">These could be challenges you've overcome, places you've lived, people you've met, or moments that changed your perspective.</div>
+            <div class="answer-space">_____________________________________________</div>
+            <div class="answer-space">_____________________________________________</div>
+            <div class="answer-space">_____________________________________________</div>
+        </div>
+
+        <div class="question-box">
+            <div class="question">What injustices or problems in the world make you genuinely angry or sad?</div>
+            <div class="answer-space">_____________________________________________</div>
+            <div class="answer-space">_____________________________________________</div>
+            <div class="answer-space">_____________________________________________</div>
+        </div>
+
+        <div class="question-box">
+            <div class="question">What would you want to be remembered for?</div>
+            <div class="answer-space">_____________________________________________</div>
+            <div class="answer-space">_____________________________________________</div>
+            <div class="answer-space">_____________________________________________</div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h3><span class="section-number">4</span>Your Creative Desires</h3>
+        <p>When we remove fear and external pressure, what do we really want to create? These questions help you connect with your authentic creative desires.</p>
+        
+        <div class="question-box">
+            <div class="question">What would you create if you knew it would be appreciated?</div>
+            <div class="reflection-prompt">Remove the fear of judgment—what would you make if you knew people would love it?</div>
+            <div class="answer-space">_____________________________________________</div>
+            <div class="answer-space">_____________________________________________</div>
+            <div class="answer-space">_____________________________________________</div>
+        </div>
+
+        <div class="question-box">
+            <div class="question">What would you create if no one would ever see it?</div>
+            <div class="reflection-prompt">What would you make purely for the joy of making it?</div>
+            <div class="answer-space">_____________________________________________</div>
+            <div class="answer-space">_____________________________________________</div>
+            <div class="answer-space">_____________________________________________</div>
+        </div>
+
+        <div class="question-box">
+            <div class="question">If you could solve one problem through your creative work, what would it be?</div>
+            <div class="answer-space">_____________________________________________</div>
+            <div class="answer-space">_____________________________________________</div>
+            <div class="answer-space">_____________________________________________</div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h3><span class="section-number">5</span>Your Authentic Self</h3>
+        <p>These questions help you identify when and where your true self emerges most clearly.</p>
+        
+        <div class="question-box">
+            <div class="question">When do you feel most like yourself?</div>
+            <div class="reflection-prompt">Think about specific situations, activities, or environments where you feel completely authentic and comfortable.</div>
+            <div class="answer-space">_____________________________________________</div>
+            <div class="answer-space">_____________________________________________</div>
+            <div class="answer-space">_____________________________________________</div>
+        </div>
+
+        <div class="question-box">
+            <div class="question">What makes you lose track of time?</div>
+            <div class="answer-space">_____________________________________________</div>
+            <div class="answer-space">_____________________________________________</div>
+            <div class="answer-space">_____________________________________________</div>
+        </div>
+
+        <div class="question-box">
+            <div class="question">If your best friend described you to a stranger, what would they say?</div>
+            <div class="reflection-prompt">Think about the qualities and characteristics they would highlight.</div>
+            <div class

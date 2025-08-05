@@ -1,0 +1,36 @@
+// Stripe Checkout Button Component for Vault Tiers
+import React from 'react'
+
+interface StripeButtonProps {
+  planId: string
+  label: string
+  tier: string
+}
+
+const StripeCheckoutButton: React.FC<StripeButtonProps> = ({ planId, label, tier }) => {
+  const handleCheckout = async () => {
+    const res = await fetch('/api/stripe/create-checkout-session', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ priceId: planId, tier }),
+    })
+
+    const data = await res.json()
+    if (data.url) {
+      window.location.href = data.url
+    } else {
+      alert('Failed to redirect to Stripe Checkout')
+    }
+  }
+
+  return (
+    <button
+      onClick={handleCheckout}
+      className="mt-4 px-6 py-2 rounded text-white bg-gradient-to-r from-indigo-500 to-purple-600 hover:opacity-90 transition"
+    >
+      {label}
+    </button>
+  )
+}
+
+export default StripeCheckoutButton

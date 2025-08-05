@@ -1,0 +1,43 @@
+// /api/stripe/webhook.ts
+import { buffer } from 'micro'
+import type { NextApiRequest, NextApiResponse } from 'next'
+import Stripe from 'stripe'
+
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+}
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
+  apiVersion: '2022-11-15',
+})
+
+const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET as string
+
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  if (req.method !== 'POST') return res.status(405).end()
+
+  const buf = await buffer(req)
+  const sig = req.headers['stripe-signature'] as string
+
+  let event: Stripe.Event
+
+  try {
+    event = stripe.webhooks.constructEvent(buf, sig, webhookSecret)
+  } catch (err) {
+    console.error('[WEBHOOK_ERROR]', err)
+    return res.status(400).send(`Webhook Error: ${(err as Error).message}`)
+  }
+
+  if (event.type === 'checkout.session.completed') {
+    const session = event.data.object as Stripe.Checkout.Session
+    const customerEmail = session.customer_email
+    const priceId = session.items?.[0]?.price?.id || session.subscription
+
+    // 🔐 TODO: Map priceId → tier, and update user in your database
+    console.log('[✔️ SUBSCRIPTION SUCCESS]', { customerEmail, priceId })
+  }
+
+  res.status(200).json({ received: true })
+}

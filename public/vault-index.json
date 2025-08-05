@@ -1,0 +1,562 @@
+[
+  {
+    "filename": "book_of_acts_study.html",
+    "title": "book_of_acts_study",
+    "tier": "Bronze",
+    "value": "$5",
+    "category": "Uncategorized",
+    "status": "draft",
+    "dropsOn": "TBD",
+    "source": "bronze/book_of_acts_study.html"
+  },
+  {
+    "filename": "close_relationship_with_god.html",
+    "title": "close_relationship_with_god",
+    "tier": "Bronze",
+    "value": "$5",
+    "category": "Uncategorized",
+    "status": "draft",
+    "dropsOn": "TBD",
+    "source": "bronze/close_relationship_with_god.html"
+  },
+  {
+    "filename": "festivals_old_new_testaments.html",
+    "title": "festivals_old_new_testaments",
+    "tier": "Bronze",
+    "value": "$5",
+    "category": "Uncategorized",
+    "status": "draft",
+    "dropsOn": "TBD",
+    "source": "bronze/festivals_old_new_testaments.html"
+  },
+  {
+    "filename": "patience_of_job.html",
+    "title": "patience_of_job",
+    "tier": "Bronze",
+    "value": "$5",
+    "category": "Uncategorized",
+    "status": "draft",
+    "dropsOn": "TBD",
+    "source": "bronze/patience_of_job.html"
+  },
+  {
+    "filename": "Guide_to_Gideons_Leadership.epub",
+    "title": "Guide_to_Gideons_Leadership",
+    "tier": "Unknown",
+    "value": "$0",
+    "category": "Uncategorized",
+    "status": "draft",
+    "dropsOn": "TBD",
+    "source": "courses/Guide_to_Gideons_Leadership/Guide_to_Gideons_Leadership.epub"
+  },
+  {
+    "filename": "Guide_to_Gideons_Leadership_Lessons_FULL.epub",
+    "title": "Guide_to_Gideons_Leadership_Lessons_FULL",
+    "tier": "Unknown",
+    "value": "$0",
+    "category": "Uncategorized",
+    "status": "draft",
+    "dropsOn": "TBD",
+    "source": "courses/Guide_to_Gideons_Leadership/Guide_to_Gideons_Leadership_Lessons_FULL.epub"
+  },
+  {
+    "filename": "Guide_to_Gideons_Leadership_Lessons_FULL.pdf",
+    "title": "Guide_to_Gideons_Leadership_Lessons_FULL",
+    "tier": "Unknown",
+    "value": "$0",
+    "category": "Uncategorized",
+    "status": "draft",
+    "dropsOn": "TBD",
+    "source": "courses/Guide_to_Gideons_Leadership/Guide_to_Gideons_Leadership_Lessons_FULL.pdf"
+  },
+  {
+    "filename": "Old_Testament_leadership_principles.jpg",
+    "title": "Old_Testament_leadership_principles",
+    "tier": "Unknown",
+    "value": "$0",
+    "category": "Uncategorized",
+    "status": "draft",
+    "dropsOn": "TBD",
+    "source": "courses/Guide_to_Gideons_Leadership/Old_Testament_leadership_principles.jpg"
+  },
+  {
+    "filename": "Guide to Bible Study Methods — Outline for a 200-P.docx",
+    "title": "Guide to Bible Study Methods — Outline for a 200-P",
+    "tier": "Unknown",
+    "value": "$0",
+    "category": "Uncategorized",
+    "status": "draft",
+    "dropsOn": "TBD",
+    "source": "courses/SOAP/Guide to Bible Study Methods — Outline for a 200-P.docx"
+  },
+  {
+    "filename": "Inductive_Methods_Observation_vs._SOAP’s_Prayer.docx",
+    "title": "Inductive_Methods_Observation_vs._SOAP’s_Prayer",
+    "tier": "Unknown",
+    "value": "$0",
+    "category": "Uncategorized",
+    "status": "draft",
+    "dropsOn": "TBD",
+    "source": "courses/SOAP/Inductive_Methods_Observation_vs._SOAP’s_Prayer.docx"
+  },
+  {
+    "filename": "Key_Differences_Between_Inductive_and_SOAP_Bible.docx",
+    "title": "Key_Differences_Between_Inductive_and_SOAP_Bible",
+    "tier": "Unknown",
+    "value": "$0",
+    "category": "Uncategorized",
+    "status": "draft",
+    "dropsOn": "TBD",
+    "source": "courses/SOAP/Key_Differences_Between_Inductive_and_SOAP_Bible.docx"
+  },
+  {
+    "filename": "Forge_Your_First_Devotional_Module_1.docx",
+    "title": "Forge_Your_First_Devotional_Module_1",
+    "tier": "Unknown",
+    "value": "$0",
+    "category": "Uncategorized",
+    "status": "draft",
+    "dropsOn": "TBD",
+    "source": "courses/ai/Forge_Your_First_Devotional_Module_1.docx"
+  },
+  {
+    "filename": "ethical-responsible-ai-niches.pdf",
+    "title": "ethical-responsible-ai-niches",
+    "tier": "Unknown",
+    "value": "$0",
+    "category": "Uncategorized",
+    "status": "draft",
+    "dropsOn": "TBD",
+    "source": "courses/ai/ethical-responsible-ai-niches.pdf"
+  },
+  {
+    "filename": "anchorforge-course-badge.png",
+    "title": "anchorforge-course-badge",
+    "tier": "Unknown",
+    "value": "$0",
+    "category": "Uncategorized",
+    "status": "draft",
+    "dropsOn": "TBD",
+    "source": "courses/badge/anchorforge-course-badge.png"
+  },
+  {
+    "filename": "Forge_Your_First_Devotional_Module_1.docx",
+    "title": "Forge_Your_First_Devotional_Module_1",
+    "tier": "Unknown",
+    "value": "$0",
+    "category": "Uncategorized",
+    "status": "draft",
+    "dropsOn": "TBD",
+    "source": "courses/forge-your-first-devotional/Forge_Your_First_Devotional_Module_1.docx"
+  },
+  {
+    "filename": "02_Module_2_Blueprint_Your_Devotional.docx",
+    "title": "02_Module_2_Blueprint_Your_Devotional",
+    "tier": "Unknown",
+    "value": "$0",
+    "category": "Uncategorized",
+    "status": "draft",
+    "dropsOn": "TBD",
+    "source": "courses/master_bible_course/02_Module_2_Blueprint_Your_Devotional.docx"
+  },
+  {
+    "filename": "Mastering_Bible_Study_Methods_Outline.docx",
+    "title": "Mastering_Bible_Study_Methods_Outline",
+    "tier": "Unknown",
+    "value": "$0",
+    "category": "Uncategorized",
+    "status": "draft",
+    "dropsOn": "TBD",
+    "source": "courses/master_bible_course/Mastering_Bible_Study_Methods_Outline.docx"
+  },
+  {
+    "filename": "overthinking_antidote_journaling_template.docx",
+    "title": "overthinking_antidote_journaling_template",
+    "tier": "Unknown",
+    "value": "$0",
+    "category": "Uncategorized",
+    "status": "draft",
+    "dropsOn": "TBD",
+    "source": "courses/overthinking_antidote/overthinking_antidote_journaling_template.docx"
+  },
+  {
+    "filename": "The Self-Care Revolution.docx",
+    "title": "The Self-Care Revolution",
+    "tier": "Unknown",
+    "value": "$0",
+    "category": "Uncategorized",
+    "status": "draft",
+    "dropsOn": "TBD",
+    "source": "courses/self_care/The Self-Care Revolution.docx"
+  },
+  {
+    "filename": "The Self-Care Revolution.epub",
+    "title": "The Self-Care Revolution",
+    "tier": "Unknown",
+    "value": "$0",
+    "category": "Uncategorized",
+    "status": "draft",
+    "dropsOn": "TBD",
+    "source": "courses/self_care/The Self-Care Revolution.epub"
+  },
+  {
+    "filename": "The Self-Care Revolution.pdf",
+    "title": "The Self-Care Revolution",
+    "tier": "Unknown",
+    "value": "$0",
+    "category": "Uncategorized",
+    "status": "draft",
+    "dropsOn": "TBD",
+    "source": "courses/self_care/The Self-Care Revolution.pdf"
+  },
+  {
+    "filename": "journaling-template.docx",
+    "title": "journaling-template",
+    "tier": "Unknown",
+    "value": "$0",
+    "category": "Uncategorized",
+    "status": "draft",
+    "dropsOn": "TBD",
+    "source": "courses/templates/journaling-template.docx"
+  },
+  {
+    "filename": "scripture-pack.pdf",
+    "title": "scripture-pack",
+    "tier": "Unknown",
+    "value": "$0",
+    "category": "Uncategorized",
+    "status": "draft",
+    "dropsOn": "TBD",
+    "source": "courses/templates/scripture-pack.pdf"
+  },
+  {
+    "filename": "Who_were_the_Bereans_in_ the_ Bible?.txt",
+    "title": "Who_were_the_Bereans_in_ the_ Bible?",
+    "tier": "Unknown",
+    "value": "$0",
+    "category": "Uncategorized",
+    "status": "draft",
+    "dropsOn": "TBD",
+    "source": "freebies/Who_were_the_Bereans_in_ the_ Bible?.txt"
+  },
+  {
+    "filename": "Who_were_the_Bereans_in_the_Bible?.md",
+    "title": "Who_were_the_Bereans_in_the_Bible?",
+    "tier": "Unknown",
+    "value": "$0",
+    "category": "Uncategorized",
+    "status": "draft",
+    "dropsOn": "TBD",
+    "source": "freebies/Who_were_the_Bereans_in_the_Bible?.md"
+  },
+  {
+    "filename": "creative_confidence_freebie.html",
+    "title": "creative_confidence_freebie",
+    "tier": "Unknown",
+    "value": "$0",
+    "category": "Uncategorized",
+    "status": "draft",
+    "dropsOn": "TBD",
+    "source": "freebies/creative_confidence_freebie.html"
+  },
+  {
+    "filename": "mindful_productivity_kit.html",
+    "title": "mindful_productivity_kit",
+    "tier": "Unknown",
+    "value": "$0",
+    "category": "Uncategorized",
+    "status": "draft",
+    "dropsOn": "TBD",
+    "source": "freebies/mindful_productivity_kit.html"
+  },
+  {
+    "filename": "motivational_quotes_pack.html",
+    "title": "motivational_quotes_pack",
+    "tier": "Unknown",
+    "value": "$0",
+    "category": "Uncategorized",
+    "status": "draft",
+    "dropsOn": "TBD",
+    "source": "freebies/motivational_quotes_pack.html"
+  },
+  {
+    "filename": "The Clarity Token:.pdf",
+    "title": "The Clarity Token:",
+    "tier": "Gold",
+    "value": "$29",
+    "category": "Uncategorized",
+    "status": "draft",
+    "dropsOn": "TBD",
+    "source": "gold/The Clarity Token:.pdf"
+  },
+  {
+    "filename": "The Prayer of the To-Do List.pdf",
+    "title": "The Prayer of the To-Do List",
+    "tier": "Gold",
+    "value": "$29",
+    "category": "Uncategorized",
+    "status": "draft",
+    "dropsOn": "TBD",
+    "source": "gold/The Prayer of the To-Do List.pdf"
+  },
+  {
+    "filename": "creative-confidence-starter-kit.html",
+    "title": "creative-confidence-starter-kit",
+    "tier": "Gold",
+    "value": "$29",
+    "category": "Uncategorized",
+    "status": "draft",
+    "dropsOn": "TBD",
+    "source": "gold/creative-confidence-starter-kit.html"
+  },
+  {
+    "filename": "deuteronomy_article.html",
+    "title": "deuteronomy_article",
+    "tier": "Gold",
+    "value": "$29",
+    "category": "Uncategorized",
+    "status": "draft",
+    "dropsOn": "TBD",
+    "source": "gold/deuteronomy_article.html"
+  },
+  {
+    "filename": "exodus_article.html",
+    "title": "exodus_article",
+    "tier": "Gold",
+    "value": "$29",
+    "category": "Uncategorized",
+    "status": "draft",
+    "dropsOn": "TBD",
+    "source": "gold/exodus_article.html"
+  },
+  {
+    "filename": "focus-reset-kit.md",
+    "title": "Focus Reset Kit",
+    "tier": "Gold",
+    "value": "$29",
+    "category": "Productivity",
+    "status": "draft",
+    "dropsOn": "2025-08-12",
+    "source": "gold/focus-reset-kit.md"
+  },
+  {
+    "filename": "foundations-of-faith-excerpt.html",
+    "title": "foundations-of-faith-excerpt",
+    "tier": "Gold",
+    "value": "$29",
+    "category": "Uncategorized",
+    "status": "draft",
+    "dropsOn": "TBD",
+    "source": "gold/foundations-of-faith-excerpt.html"
+  },
+  {
+    "filename": "genesis_article.html",
+    "title": "genesis_article",
+    "tier": "Gold",
+    "value": "$29",
+    "category": "Uncategorized",
+    "status": "draft",
+    "dropsOn": "TBD",
+    "source": "gold/genesis_article.html"
+  },
+  {
+    "filename": "inspiration_arsenal_zip_contents.html",
+    "title": "inspiration_arsenal_zip_contents",
+    "tier": "Gold",
+    "value": "$29",
+    "category": "Uncategorized",
+    "status": "draft",
+    "dropsOn": "TBD",
+    "source": "gold/inspiration_arsenal_zip_contents.html"
+  },
+  {
+    "filename": "leviticus_article.html",
+    "title": "leviticus_article",
+    "tier": "Gold",
+    "value": "$29",
+    "category": "Uncategorized",
+    "status": "draft",
+    "dropsOn": "TBD",
+    "source": "gold/leviticus_article.html"
+  },
+  {
+    "filename": "mindful_productivity_kit.html",
+    "title": "mindful_productivity_kit",
+    "tier": "Gold",
+    "value": "$29",
+    "category": "Uncategorized",
+    "status": "draft",
+    "dropsOn": "TBD",
+    "source": "gold/mindful_productivity_kit.html"
+  },
+  {
+    "filename": "motivational_quotes_pack.html",
+    "title": "motivational_quotes_pack",
+    "tier": "Gold",
+    "value": "$29",
+    "category": "Uncategorized",
+    "status": "draft",
+    "dropsOn": "TBD",
+    "source": "gold/motivational_quotes_pack.html"
+  },
+  {
+    "filename": "numbers_article.html",
+    "title": "numbers_article",
+    "tier": "Gold",
+    "value": "$29",
+    "category": "Uncategorized",
+    "status": "</strong> God's declaration that Moses is \"faithful in all my house\" and sees God's \"form\" rather than just receiving dreams and visions establishes his unique prophetic status. This divine testimony provides the foundation for Moses' unquestioned authority in leading Israel and receiving divine law.</p>",
+    "dropsOn": "TBD",
+    "source": "gold/numbers_article.html"
+  },
+  {
+    "filename": "quotes_pack_zip_contents.html",
+    "title": "quotes_pack_zip_contents",
+    "tier": "Gold",
+    "value": "$29",
+    "category": "Uncategorized",
+    "status": "draft",
+    "dropsOn": "TBD",
+    "source": "gold/quotes_pack_zip_contents.html"
+  },
+  {
+    "filename": "sample.md",
+    "title": "Gold Drop Example",
+    "tier": "Gold",
+    "value": "$29",
+    "category": "Toolkit",
+    "status": "draft",
+    "dropsOn": "2025-08-20",
+    "source": "gold/sample.md"
+  },
+  {
+    "filename": "social_media_assets.html",
+    "title": "social_media_assets",
+    "tier": "Gold",
+    "value": "$29",
+    "category": "Uncategorized",
+    "status": "draft",
+    "dropsOn": "TBD",
+    "source": "gold/social_media_assets.html"
+  },
+  {
+    "filename": "turning_gifts_into_ministry_article.html",
+    "title": "turning_gifts_into_ministry_article",
+    "tier": "Unknown",
+    "value": "$0",
+    "category": "Uncategorized",
+    "status": "draft",
+    "dropsOn": "TBD",
+    "source": "motivational/turning_gifts_into_ministry_article.html"
+  },
+  {
+    "filename": "sample.md",
+    "title": "Platinum Promo Pack",
+    "tier": "Platinum",
+    "value": "$49",
+    "category": "Strategy",
+    "status": "draft",
+    "dropsOn": "2025-08-15",
+    "source": "platinum/sample.md"
+  },
+  {
+    "filename": "The Consistency Token_ Holy Habits in an Instant World.pdf",
+    "title": "The Consistency Token_ Holy Habits in an Instant World",
+    "tier": "Silver",
+    "value": "$15",
+    "category": "Uncategorized",
+    "status": "draft",
+    "dropsOn": "TBD",
+    "source": "silver/The Consistency Token_ Holy Habits in an Instant World.pdf"
+  },
+  {
+    "filename": "The Courage Token_ Faith Over Fear in Your Daily Work.pdf",
+    "title": "The Courage Token_ Faith Over Fear in Your Daily Work",
+    "tier": "Silver",
+    "value": "$15",
+    "category": "Uncategorized",
+    "status": "draft",
+    "dropsOn": "TBD",
+    "source": "silver/The Courage Token_ Faith Over Fear in Your Daily Work.pdf"
+  },
+  {
+    "filename": "dead_sea_scrolls_importance.html",
+    "title": "\"The Importance of the Dead Sea Scrolls to Modern Christianity\"",
+    "tier": "silver",
+    "value": "\"$67\"",
+    "category": "historical-theology",
+    "status": "live",
+    "dropsOn": "2025-08-05",
+    "source": "silver/theology/dead_sea_scrolls_importance.html"
+  },
+  {
+    "filename": "index.html",
+    "title": "index",
+    "tier": "Unknown",
+    "value": "$0",
+    "category": "Uncategorized",
+    "status": "draft",
+    "dropsOn": "TBD",
+    "source": "silver/theology/index.html"
+  },
+  {
+    "filename": "secrets_of_qumran.html",
+    "title": "\"The Secrets of Qumran\"",
+    "tier": "silver",
+    "value": "\"$67\"",
+    "category": "historical-theology",
+    "status": "live",
+    "dropsOn": "2025-08-05",
+    "source": "silver/theology/secrets_of_qumran.html"
+  },
+  {
+    "filename": "what_scrolls_reveal.html",
+    "title": "\"What the Dead Sea Scrolls Reveal\"",
+    "tier": "silver",
+    "value": "\"$67\"",
+    "category": "historical-theology",
+    "status": "live",
+    "dropsOn": "2025-08-05",
+    "source": "silver/theology/what_scrolls_reveal.html"
+  },
+  {
+    "filename": "who_were_the_essenes.html",
+    "title": "\"Who Were the Essenes and Where Did They Go?\"",
+    "tier": "silver",
+    "value": "\"$67\"",
+    "category": "historical-theology",
+    "status": "live",
+    "dropsOn": "2025-08-05",
+    "source": "silver/theology/who_were_the_essenes.html"
+  },
+  {
+    "filename": "useNotesStore.ts",
+    "title": "useNotesStore",
+    "tier": "Unknown",
+    "value": "$0",
+    "category": "Uncategorized",
+    "status": "draft",
+    "dropsOn": "TBD",
+    "source": "store/useNotesStore.ts"
+  },
+  {
+    "filename": "useTimerStore.ts",
+    "title": "useTimerStore",
+    "tier": "Unknown",
+    "value": "$0",
+    "category": "Uncategorized",
+    "status": "draft",
+    "dropsOn": "TBD",
+    "source": "store/useTimerStore.ts"
+  },
+  {
+    "filename": "useTokenStore.js",
+    "title": "useTokenStore",
+    "tier": "Unknown",
+    "value": "$0",
+    "category": "Uncategorized",
+    "status": "draft",
+    "dropsOn": "TBD",
+    "source": "store/useTokenStore.js"
+  }
+]

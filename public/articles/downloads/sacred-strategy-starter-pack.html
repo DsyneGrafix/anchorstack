@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sacred Strategy Starter Pack - AnchorStack</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            padding: 60px 40px;
+            text-align: center;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+            margin-bottom: 40px;
+        }
+        
+        .product-header {
+            margin-bottom: 40px;
+        }
+        
+        .product-badge {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        
+        .product-title {
+            font-size: 36px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin: 0 0 15px 0;
+        }
+        
+        .product-subtitle {
+            font-size: 18px;
+            color: #7f8c8d;
+            margin: 0 0 30px 0;
+            font-style: italic;
+        }
+        
+        .price-section {
+            margin: 40px 0;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 16px;
+            border: 3px solid #e9ecef;
+        }
+        
+        .price {
+            font-size: 48px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin: 0;
+        }
+        
+        .price-note {
+            font-size: 16px;
+            color: #6c757d;
+            margin: 10px 0 0 0;
+        }
+        
+        .includes-section {
+            text-align: left;
+            margin: 40px 0;
+        }
+        
+        .includes-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .includes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .include-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .include-icon {
+            font-size: 24px;
+            margin-right: 15px;
+            margin-top: 3px;
+            flex-shrink: 0;
+        }
+        
+        .include-content h4 {
+            margin: 0 0 8px 0;
+            color: #2c3e50;
+            font-size: 18px;
+        }
+        
+        .include-content p {
+            margin: 0;
+            color: #6c757d;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .bonus-section {
+            margin: 40px 0;
+            padding: 30px;
+            background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+            border-radius: 16px;
+            text-align: center;
+        }
+        
+        .bonus-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin: 0 0 15px 0;
+        }
+        
+        .bonus-value {
+            font-size: 18px;
+            color: #e17055;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .testimonial {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 16px;
+            margin: 40px 0;
+            border-left: 5px solid #667eea;
+        }
+        
+        .testimonial-text {
+            font-size: 18px;
+            font-style: italic;
+            color: #495057;
+            margin: 0 0 15px 0;
+            line-height: 1.7;
+        }
+        
+        .testimonial-author {
+            font-weight: bold;
+            color: #2c3e50;
+            margin: 0;
+        }
+        
+        .cta-section {
+            margin: 50px 0;
+        }
+        
+        .cta-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 20px 50px;
+            font-size: 20px;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+            margin-bottom: 20px;
+            display: inline-block;
+            text-decoration: none;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+        }
+        
+        .guarantee {
+            font-size: 14px;
+            color: #6c757d;
+            margin-top: 20px;
+        }
+        
+        .faq-section {
+            text-align: left;
+            margin: 50px 0;
+        }
+        
+        .faq-title {
+            font-size: 28px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .faq-item {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+        }
+        
+        .faq-question {
+            font-weight: bold;
+            color: #2c3e50;
+            margin: 0 0 10px 0;
+            font-size: 18px;
+        }
+        
+        .faq-answer {
+            color: #6c757d;
+            margin: 0;
+            line-height: 1.6;
+        }
+        
+        .urgency-banner {
+            background: #e74c3c;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-weight: 600;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            font-size: 14px;
+        }
+        
+        .urgency-banner.show {
+            display: block;
+        }
+        
+        .content-wrapper {
+            margin-top: 60px;
+        }
+        
+        @media (max-width: 768px) {
+            .product-card {
+                padding: 40px 20px;
+            }
+            
+            .product-title {
+                font-size: 28px;
+            }
+            
+            .price {
+                font-size: 36px;
+            }
+            
+            .includes-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-button {
+                padding: 18px 40px;
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="urgency-banner" id="urgencyBanner">
+        🔥 Limited Time: Get the Sacred Strategy Starter Pack for just $19 (Regular $47) - Ends Soon!
+    </div>
+    
+    <div class="content-wrapper">
+        <div class="container">
+            <div class="product-card">
+                <div class="product-header">
+                    <div class="product-badge">Digital Download</div>
+                    <h1 class="product-title">Sacred Strategy Starter Pack</h1>
+                    <p class="product-subtitle">Transform your to-do list into a prayer list with this complete faith-driven productivity system</p>
+                    
+                    <div style="font-size: 48px; color: #667eea; margin: 20px 0;">⚓</div>
+                </div>
+                
+                <div class="price-section">
+                    <div class="price">$19</div>
+                    <p class="price-note">Regular Price: <strike>$47</strike> • Save $28 Today</p>
+                </div>
+                
+                <div class="includes-section">
+                    <h3 class="includes-title">🎁 Everything You Get Instantly:</h3>
+                    
+                    <div class="includes-grid">
+                        <div class="include-item">
+                            <div class="include-icon">📋</div>
+                            <div class="include-content">
+                                <h4>Sacred Strategy Token Tracker</h4>
+                                <p>28-day printable tracker for all 5 Sacred Tokens with scripture verses and reflection prompts</p>
+                            </div>
+                        </div>
+                        
+                        <div class="include-item">
+                            <div class="include-icon">📖</div>
+                            <div class="include-content">
+                                <h4>Complete Essay Collection</h4>
+                                <p>"Prayer of the To-Do List" + 3 detailed token guides (Clarity, Courage, Consistency) - 25+ pages</p>
+                            </div>
+                        </div>
+                        
+                        <div class="include-item">
+                            <div class="include-icon">📧</div>
+                            <div class="include-content">
+                                <h4>5 Tokens in 5 Days Email Course</h4>
+                                <p>Daily email lessons with practical applications for each Sacred Token</p>
+                            </div>
+                        </div>
+                        
+                        <div class="include-item">
+                            <div class="include-icon">🎨</div>
+                            <div class="include-content">
+                                <h4>Printable Prayer Cards</h4>
+                                <p>Beautiful desktop/wallet cards with each token's prayer and scripture verse</p>
+                            </div>
+                        </div>
+                        
+                        <div class="include-item">
+                            <div class="include-icon">📱</div>
+                            <div class="include-content">
+                                <h4>Digital Wallpapers</h4>
+                                <p>Phone and desktop backgrounds featuring Sacred Strategy quotes and token reminders</p>
+                            </div>
+                        </div>
+                        
+                        <div class="include-item">
+                            <div class="include-icon">🎯</div>
+                            <div class="include-content">
+                                <h4>Weekly Planning Template</h4>
+                                <p>Sacred Strategy weekly planner integrating token collection with daily tasks</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bonus-section">
+                    <h3 class="bonus-title">🎁 Special Launch Bonus</h3>
+                    <div class="bonus-value">FREE: "Sacred Morning Routine" Audio Guide ($15 Value)</div>
+                    <p>7-minute guided morning practice to start each day with sacred intention</p>
+                </div>
+                
+                <div class="testimonial">
+                    <p class="testimonial-text">"The Sacred Strategy completely transformed how I approach my work. Instead of feeling overwhelmed by my to-do list, I now see each task as an opportunity to serve God and others. The token system makes it feel like a meaningful journey rather than just checking boxes."</p>
+                    <p class="testimonial-author">— Sarah M., Christian Entrepreneur</p>
+                </div>
+                
+                <div class="cta-section">
+                    <a href="#" class="cta-button" onclick="handlePurchase()">
+                        Start Your Sacred Strategy Today
+                    </a>
+                    <div class="guarantee">
+                        ✅ Instant download • 💰 30-day money-back guarantee • 🔒 Secure payment
+                    </div>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="faq-section">
+                    <h3 class="faq-title">Frequently Asked Questions</h3>
+                    
+                    <div class="faq-item">
+                        <h4 class="faq-question">How is Sacred Strategy different from regular productivity methods?</h4>
+                        <p class="faq-answer">Unlike traditional productivity systems that focus solely on efficiency, Sacred Strategy integrates faith, purpose, and service into your daily work. It's about being productive for God's glory, not just personal achievement.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h4 class="faq-question">Can non-Christians use this system?</h4>
+                        <p class="faq-answer">While Sacred Strategy is rooted in Christian principles, the core concepts of intentional work, service to others, and purpose-driven productivity can benefit anyone seeking more meaningful work life.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h4 class="faq-question">How long does it take to see results?</h4>
+                        <p class="faq-answer">Many users report feeling more peaceful and purposeful in their work within the first week. The token tracking system helps you see progress daily, and most people establish strong sacred productivity habits within 28 days.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h4 class="faq-question">What if I'm too busy to implement a new system?</h4>
+                        <p class="faq-answer">Sacred Strategy isn't about adding more to your plate—it's about transforming what's already there. The token system takes just minutes per day and actually helps you prioritize better, often saving time.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h4 class="faq-question">Is this available in physical format?</h4>
+                        <p class="faq-answer">This is a digital download package, which means you get instant access and can print any materials you want to use physically. Perfect for those who like both digital and paper-based planning.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="product-card" style="background: linear-gradient(135deg, #74b9ff, #0984e3); color: white;">
+                <h3 style="margin-top: 0; font-size: 28px;">Why Now?</h3>
+                <p style="font-size: 18px; line-height: 1.7; margin-bottom: 30px;">
+                    In a world obsessed with hustle culture and productivity hacks, faithful creators need a different approach. Sacred Strategy offers what your soul has been searching for: a way to work that honors God, serves others, and brings deep satisfaction.
+                </p>
+                <p style="font-size: 16px; margin-bottom: 30px;">
+                    Join hundreds of believers who have already transformed their daily work into daily worship.
+                </p>
+                <a href="#" class="cta-button" onclick="handlePurchase()" style="background: white; color: #0984e3;">
+                    Get Started Now - Just $19
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Show urgency banner
+        document.getElementById('urgencyBanner').style.display = 'block';
+        
+        // Handle purchase click
+        function handlePurchase() {
+            // Track the purchase intent
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'purchase_intent', {
+                    'event_category': 'ecommerce',
+                    'event_label': 'sacred_strategy_starter_pack',
+                    'value': 19
+                });
+            }
+            
+            // Redirect to payment processor (Gumroad, Stripe, etc.)
+            // Replace with your actual payment link
+            window.open('https://gumroad.com/l/sacred-strategy-starter-pack', '_blank');
+            
+            // Alternative: Stripe Checkout
+            // redirectToStripeCheckout();
+        }
+        
+        // Optional: Stripe integration
+        function redirectToStripeCheckout() {
+            // This would integrate with Stripe Checkout
+            const stripe = Stripe('pk_test_your_publishable_key');
+            
+            stripe.redirectToCheckout({
+                lineItems: [{
+                    price: 'price_sacred_strategy_starter_pack',
+                    quantity: 1,
+                }],
+                mode: 'payment',
+                successUrl: 'https://anchorstack.pro/thank-you',
+                cancelUrl: 'https://anchorstack.pro/sacred-strategy-starter-pack',
+            });
+        }
+        
+        // Scroll-based urgency
+        let urgencyShown = false;
+        window.addEventListener('scroll', () => {
+            if (!urgencyShown && window.scrollY > 300) {
+                urgencyShown = true;
+                document.getElementById('urgencyBanner').style.background = '#e74c3c';
+                document.getElementById('urgencyBanner').innerHTML = '⏰ Don\'t Miss Out: Sacred Strategy Starter Pack - Limited Time $19 (Save $28)';
+            }
+        });
+        
+        // Exit intent popup (optional enhancement)
+        let exitIntentShown = false;
+        document.addEventListener('mouseleave', (e) => {
+            if (!exitIntentShown && e.clientY <= 0) {
+                exitIntentShown = true;
+                if (confirm('Wait! Get the Sacred Strategy Starter Pack for just $19 before you go. Transform your productivity with faith-based methods. Continue?')) {
+                    handlePurchase();
+                }
+            }
+        });
+        
+        // Social proof counter (simulated)
+        let purchaseCount = 247; // Update this with real numbers
+        const socialProofElement = document.createElement('div');
+        socialProofElement.innerHTML = `<small style="color: #6c757d;">🔥 ${purchaseCount} people have started their Sacred Strategy journey</small>`;
+        socialProofElement.style.textAlign = 'center';
+        socialProofElement.style.marginTop = '15px';
+        
+        // Add social proof after price section
+        document.querySelector('.price-section').appendChild(socialProofElement);
+    </script>
+</body>
+</html>

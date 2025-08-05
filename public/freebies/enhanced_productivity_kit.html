@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mindful Productivity Kit | AnchorStack Vault</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 25px 80px rgba(0,0,0,0.3);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .product-header {
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .product-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 25px,
+                rgba(255, 255, 255, 0.08) 25px,
+                rgba(255, 255, 255, 0.08) 50px
+            );
+            animation: drift 20s linear infinite;
+        }
+        
+        @keyframes drift {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        
+        .product-title {
+            font-size: 3.2rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            z-index: 10;
+            position: relative;
+        }
+        
+        .product-subtitle {
+            font-size: 1.4rem;
+            opacity: 0.95;
+            margin-bottom: 1.5rem;
+            z-index: 10;
+            position: relative;
+        }
+        
+        .tier-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(255,255,255,0.25), rgba(255,255,255,0.15));
+            padding: 0.8rem 1.8rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+            z-index: 10;
+            position: relative;
+            animation: glow-pulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes glow-pulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(255,255,255,0.3); }
+            50% { box-shadow: 0 0 30px rgba(255,255,255,0.5); }
+        }
+        
+        .content-area {
+            padding: 2.5rem;
+        }
+        
+        .social-proof {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 1%, #fff3cd 100%);
+            border: 2px solid #f39c12;
+            border-radius: 15px;
+            padding: 1.8rem;
+            margin: 2rem 0;
+            font-style: italic;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 6px 20px rgba(243, 156, 18, 0.2);
+        }
+        
+        .social-proof::before {
+            content: '⭐';
+            position: absolute;
+            top: 15px;
+            left: 20px;
+            font-size: 1.5rem;
+            animation: rotate 4s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .kit-contents {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border: 2px solid #6c757d;
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin: 2.5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .kit-contents::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #667eea);
+            background-size: 200% 100%;
+            animation: shimmer 3s linear infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        
+        .component-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 15px;
+            border-left: 6px solid #667eea;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .component-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background: linear-gradient(180deg, #667eea, #764ba2);
+        }
+        
+        .component-item:hover {
+            transform: translateY(-8px) translateX(5px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+        }
+        
+        .component-icon {
+            font-size: 2.5rem;
+            margin-right: 2rem;
+            margin-top: 0.3rem;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+        
+        .component-title {
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+        }
+        
+        .component-desc {
+            color: #6c757d;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+        
+        .download-section {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 3.5rem 2rem;
+            text-align: center;
+            margin: 3rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .download-section::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: linear-gradient(45deg, #10b981, #059669, #34d399, #10b981);
+            border-radius: 20px;
+            z-index: -1;
+            animation: border-glow 4s linear infinite;
+            background-size: 400% 400%;
+        }
+        
+        @keyframes border-glow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .download-btn {
+            background: white;
+            color: #10b981;
+            padding: 1.4rem 3rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin: 0.8rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(255,255,255,0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .download-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: linear-gradient(45deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.1));
+            transition: all 0.3s ease;
+            border-radius: 50px;
+            transform: translate(-50%, -50%);
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(255,255,255,0.5);
+        }
+        
+        .download-btn:hover::before {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .email-btn {
+            background: #667eea;
+            color: white;
+        }
+        
+        h2 {
+            color: #2c3e50;
+            border-bottom: 4px solid #667eea;
+            padding-bottom: 0.8rem;
+            margin-top: 3rem;
+            margin-bottom: 2rem;
+            position: relative;
+            font-size: 2rem;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+        
+        .principle-box {
+            background: linear-gradient(135deg, #f1f3f4 0%, #e8eaf0 100%);
+            border-left: 6px solid #667eea;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            border-radius: 0 15px 15px 0;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .principle-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background: linear-gradient(180deg, #667eea, #764ba2);
+        }
+        
+        .principle-box:hover {
+            transform: translateX(10px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.15);
+        }
+        
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        li {
+            position: relative;
+            padding-left: 2.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+        
+        li::before {
+            content: '🎯';
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 1.3rem;
+        }
+        
+        .highlight-section {
+            background: linear-gradient(135deg, #e8f4fd 0%, #b3d9ff 1%, #e8f4fd 100%);
+            border: 2px solid #667eea;
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin: 3rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .highlight-section::before {
+            content: '✨';
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 2rem;
+            opacity: 0.7;
+            animation: twinkle 2s ease-in-out infinite;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.7; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+        
+        @media (max-width: 600px) {
+            .product-title { font-size: 2.5rem; }
+            .component-item { 
+                flex-direction: column; 
+                text-align: center;
+            }
+            .component-icon { 
+                margin-bottom: 1rem; 
+                margin-right: 0;
+            }
+            .content-area {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="product-header">
+        <h1 class="product-title">🧘 Mindful Productivity Kit</h1>
+        <p class="product-subtitle">Gentle rhythms for sustainable success</p>
+        <span class="tier-badge">Mid-Tier Vault Product</span>
+    </div>
+
+    <div class="content-area">
+        <div class="social-proof">
+            "Finally, a productivity system that doesn't make me feel like a machine. This kit helped me find my sustainable rhythm." - Sarah K., Creator
+        </div>
+
+        <h2>What You'll Receive</h2>
+
+        <div class="kit-contents">
+            <h3 style="text-align: center; color: #667eea; margin-bottom: 2rem; font-size: 1.4rem;">Complete Digital Toolkit</h3>
+            
+            <div class="component-item">
+                <div class="component-icon">📋</div>
+                <div>
+                    <div class="component-title">5-Day Mindful Productivity Challenge</div>
+                    <div class="component-desc">Daily practices to build sustainable work rhythms without burnout. Each day focuses on a core principle with actionable steps.</div>
+                </div>
+            </div>
+
+            <div class="component-item">
+                <div class="component-icon">🌅</div>
+                <div>
+                    <div class="component-title">Morning Intention Planner</div>
+                    <div class="component-desc">Printable weekly planner that starts each day with purpose and clarity. Includes reflection prompts and priority setting.</div>
+                </div>
+            </div>
+
+            <div class="component-item">
+                <div class="component-icon">🌙</div>
+                <div>
+                    <div class="component-title">Evening Reflection Journal</div>
+                    <div class="component-desc">End-of-day practice for processing, learning, and celebrating progress. Builds self-awareness and momentum.</div>
+                </div>
+            </div>
+
+            <div class="component-item">
+                <div class="component-icon">⚙️</div>
+                <div>
+                    <div class="component-title">Notion Template & PDF Versions</div>
+                    <div class="component-desc">Choose your format - digital Notion workspace or printable PDFs. Both included for maximum flexibility.</div>
+                </div>
+            </div>
+
+            <div class="component-item">
+                <div class="component-icon">🎯</div>
+                <div>
+                    <div class="component-title">Digital Clarity Toolkit</div>
+                    <div class="component-desc">Practical strategies for email management, focus protection, and maintaining mental space in a noisy world.</div>
+                </div>
+            </div>
+        </div>
+
+        <h2>The 5 Core Principles</h2>
+
+        <div class="principle-box">
+            <strong>Day 1: Intentional Beginning</strong><br>
+            Start each day with purpose instead of reactivity. Learn the 3-minute morning practice that sets your entire day's tone.
+        </div>
+
+        <div class="principle-box">
+            <strong>Day 2: Rhythmic Work</strong><br>
+            Discover your natural energy patterns and align your most important work with your peak hours.
+        </div>
+
+        <div class="principle-box">
+            <strong>Day 3: Mindful Breaks</strong><br>
+            Transform break time from guilty escape to strategic restoration. Quality rest = quality work.
+        </div>
+
+        <div class="principle-box">
+            <strong>Day 4: Digital Boundaries</strong><br>
+            Create healthy relationships with technology. Your devices should serve you, not control you.
+        </div>
+
+        <div class="principle-box">
+            <strong>Day 5: Gentle Accountability</strong><br>
+            Build sustainable progress tracking that motivates without shaming. Celebrate small wins consistently.
+        </div>
+
+        <h2>Perfect For:</h2>
+
+        <ul>
+            <li><strong>Overwhelmed creators</strong> who need sustainable productivity systems</li>
+            <li><strong>Recovering perfectionists</strong> ready to embrace "good enough" progress</li>
+            <li><strong>Spiritual entrepreneurs</strong> seeking work-life integration over separation</li>
+            <li><strong>Anyone feeling burned out</strong> by traditional hustle culture approaches</li>
+        </ul>
+
+        <h2>What Makes This Different</h2>
+
+        <p>Most productivity systems treat you like a machine that needs optimization. This kit treats you like a human who needs rhythm, rest, and sustainable practices that actually stick.</p>
+
+        <div class="highlight-section">
+            <p>Instead of "crushing your goals," you'll learn to <strong>cultivate your capacity</strong>. Instead of forcing productivity, you'll discover how to <strong>flow with your natural rhythms</strong>. Instead of guilt-driven hustle, you'll build <strong>grace-based momentum</strong>.</p>
+        </div>
+
+        <div class="download-section">
+            <h3 style="color: white; margin-bottom: 1rem; font-size: 1.8rem;">Ready to Find Your Sustainable Rhythm?</h3>
+            <p style="margin-bottom: 2rem; font-size: 1.1rem;">Download immediately and start your mindful productivity journey today.</p>
+            <a href="#" class="download-btn">📥 Download Complete Kit ($27)</a>
+            <a href="#" class="download-btn email-btn">🎁 Add to Bundle (Save 40%)</a>
+        </div>
+
+        <h2>Bonus Materials Included</h2>
+
+        <ul>
+            <li>📱 <strong>Phone Wallpapers</strong> with mindful productivity reminders</li>
+            <li>📧 <strong>Email Signature Templates</strong> with gentle boundary messaging</li>
+            <li>🎵 <strong>Focus Playlist Recommendations</strong> for different types of work</li>
+            <li>📖 <strong>Quick Reference Cards</strong> for the 5 core principles</li>
+        </ul>
+
+        <div class="social-proof">
+            "I've tried every productivity system out there. This is the first one that made me feel more human, not less." - Marcus T., Consultant
+        </div>
+
+        <h2>Implementation Timeline</h2>
+
+        <div class="principle-box">
+            <strong>Week 1:</strong> Complete the 5-day challenge, one principle per day<br>
+            <strong>Week 2:</strong> Implement your chosen planner format and begin daily rhythms<br>
+            <strong>Week 3:</strong> Refine your digital boundaries and break practices<br>
+            <strong>Week 4+:</strong> Maintain your sustainable system with gentle accountability
+        </div>
+
+        <div class="highlight-section">
+            <p style="font-style: italic; color: #667eea; font-size: 1.2rem; margin: 0;">
+                This isn't just another productivity hack.<br>
+                It's a complete mindset shift toward sustainable success.
+            </p>
+        </div>
+    </div>
+</div>
+
+<footer style="text-align: center; font-size: 0.85rem; color: #fff; margin-top: 2rem; padding: 2rem;"> © Copyright AnchorStack.pro 2025 — All rights reserved. <br>Part of the CreatorOS Wisdom Vault Initiative. </footer>
+
+</body>
+</html>
